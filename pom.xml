@@ -102,6 +102,20 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>exec-populate-mongodb</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <executable>mongo</executable>
+                            <arguments>
+                                <argument>populate_mongo.js</argument>
+                            </arguments>
+                        </configuration>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
 

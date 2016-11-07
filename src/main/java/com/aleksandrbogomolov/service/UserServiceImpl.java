@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findOne(String email) {
-        return repository.findOne(email);
+        return repository.findByEmail(email);
     }
 
     @Override
