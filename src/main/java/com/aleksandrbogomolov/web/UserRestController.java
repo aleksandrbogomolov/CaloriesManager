@@ -28,9 +28,14 @@ public class UserRestController {
         service.delete(email);
     }
 
-    @GetMapping("/{email:.+}")
-    public User getOne(@PathVariable String email) {
-        return service.findOne(email);
+    @GetMapping("/{id}")
+    public User getOneById(@PathVariable int id) {
+        return service.findOneById(String.valueOf(id));
+    }
+
+    @GetMapping("/search/{email:.+}")
+    public User getOneByEmail(@PathVariable String email) {
+        return service.findOneByEmail(email);
     }
 
     @GetMapping

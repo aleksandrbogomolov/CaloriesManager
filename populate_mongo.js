@@ -7,6 +7,7 @@ print('populate mongodb');
 mongoDB.users.update(
     {"email": "user@mail.ru"},
     {
+        "_id": "1",
         "_class": "com.aleksandrbogomolov.domain.User",
         "name": "User",
         "email": "user@mail.ru",
@@ -22,6 +23,7 @@ mongoDB.users.update(
 mongoDB.users.update(
     {"email": "admin@mail.ru"},
     {
+        "_id": "2",
         "_class": "com.aleksandrbogomolov.domain.User",
         "name": "Admin",
         "email": "admin@mail.ru",

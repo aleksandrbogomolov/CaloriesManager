@@ -6,6 +6,7 @@ import com.mongodb.MongoClient;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,9 +31,14 @@ public class UserRestControllerTest {
 
     private final MongoTemplate template = new MongoTemplate(mongo, database);
 
-    private final User testUser1 = new User("test1", "test1@mail.ru", "pass1", 2000, true, LocalDate.of(2016, 11, 7), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
+    private final User testUser1 = new User("1", "test1", "test1@mail.ru", "pass1", 2000, true, LocalDate.of(2016, 11, 7), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
 
-    private final User testUser2 = new User("test2", "test2@mail.ru", "pass2", 2000, true, LocalDate.of(2016, 11, 8), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
+    private final User testUser2 = new User("2", "test2", "test2@mail.ru", "pass2", 2000, true, LocalDate.of(2016, 11, 8), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
+
+    @Before
+    public void setUp() throws Exception {
+        if (template.collectionExists("users")) template.dropCollection("users");
+    }
 
     @After
     public void tearDown() throws Exception {
@@ -59,10 +65,18 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void getOne() throws Exception {
+    public void getOneById() throws Exception {
         template.insert(testUser1);
         given().auth().basic("user", "password")
-               .when().get(host + "/test1@mail.ru")
+               .when().get(host + "/" + testUser1.getId())
+               .then().statusCode(200).body("name", equalTo("test1"));
+    }
+
+    @Test
+    public void getOneByEmail() throws Exception {
+        template.insert(testUser1);
+        given().auth().basic("user", "password")
+               .when().get(host + "/search/test1@mail.ru")
                .then().statusCode(200).body("name", equalTo("test1"));
     }
 

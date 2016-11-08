@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public interface MealRepository extends MongoRepository<Meal, String> {
 
     Meal save(Meal meal);
@@ -13,5 +14,5 @@ public interface MealRepository extends MongoRepository<Meal, String> {
 
     Meal findOne(String id);
 
-    List<Meal> findAll();
+    List<Meal> findAllByUserId();
 }

@@ -1,16 +1,17 @@
 package com.aleksandrbogomolov.service.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
+import com.aleksandrbogomolov.to.MealTO;
 
 import java.util.List;
 
 public interface MealService {
 
-    Meal save(Meal meal);
+    MealTO save(Meal meal, String userId);
 
     void delete(String id);
 
-    Meal findOne(String id);
+    MealTO findOne(String id);
 
-    List<Meal> findAll();
+    List<MealTO> findAll();
 }
