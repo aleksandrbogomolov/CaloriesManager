@@ -1,7 +1,7 @@
 package com.aleksandrbogomolov.web;
 
 import com.aleksandrbogomolov.domain.User;
-import com.aleksandrbogomolov.service.UserService;
+import com.aleksandrbogomolov.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +33,7 @@ public class UserRestController {
         return service.findOne(email);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<User> getAll() {
         return service.findAll();
     }

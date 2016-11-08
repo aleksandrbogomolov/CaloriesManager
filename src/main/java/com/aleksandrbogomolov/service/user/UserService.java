@@ -1,4 +1,4 @@
-package com.aleksandrbogomolov.service;
+package com.aleksandrbogomolov.service.user;
 
 import com.aleksandrbogomolov.domain.User;
 

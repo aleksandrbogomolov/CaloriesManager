@@ -54,31 +54,4 @@ public class User {
                ", roles=" + roles +
                '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (caloriesPerDay != user.caloriesPerDay) return false;
-        if (!name.equals(user.name)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!password.equals(user.password)) return false;
-        if (!createdDate.equals(user.createdDate)) return false;
-        return roles.equals(user.roles);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + caloriesPerDay;
-        result = 31 * result + createdDate.hashCode();
-        result = 31 * result + roles.hashCode();
-        return result;
-    }
 }

@@ -1,4 +1,4 @@
-package com.aleksandrbogomolov.repository;
+package com.aleksandrbogomolov.repository.user;
 
 import com.aleksandrbogomolov.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

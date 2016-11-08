@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = "server.port=8888")
 public class UserRestControllerTest {
 
-    private final String database = "calories-manager", host = "http://localhost:8888";
+    private final String database = "calories-manager", host = "http://localhost:8888/user";
 
     private final MongoClient mongo = new MongoClient("localhost", 27017);
 
@@ -43,7 +43,7 @@ public class UserRestControllerTest {
     public void saveUser() throws Exception {
         given().auth().basic("user", "password")
                .contentType(ContentType.JSON).body(testUser1)
-               .when().post(host + "/user")
+               .when().post(host)
                .then().statusCode(200).body("name", equalTo("test1"));
     }
 
@@ -53,7 +53,7 @@ public class UserRestControllerTest {
         template.insert(testUser2);
         assertTrue(2 == template.getCollection("users").count());
         given().auth().basic("user", "password")
-               .when().delete(host + "/user/test2@mail.ru")
+               .when().delete(host + "/test2@mail.ru")
                .then().statusCode(200);
         assertTrue(1 == template.getCollection("users").count());
     }
@@ -62,7 +62,7 @@ public class UserRestControllerTest {
     public void getOne() throws Exception {
         template.insert(testUser1);
         given().auth().basic("user", "password")
-               .when().get(host + "/user/test1@mail.ru")
+               .when().get(host + "/test1@mail.ru")
                .then().statusCode(200).body("name", equalTo("test1"));
     }
 
@@ -71,7 +71,7 @@ public class UserRestControllerTest {
         template.insert(testUser1);
         template.insert(testUser2);
         given().auth().basic("user", "password")
-               .when().get(host + "/user/all")
+               .when().get(host)
                .then().statusCode(200).body("name", Matchers.hasItems("test1", "test2"));
     }
 }

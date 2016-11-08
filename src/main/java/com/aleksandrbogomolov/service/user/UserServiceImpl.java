@@ -1,7 +1,7 @@
-package com.aleksandrbogomolov.service;
+package com.aleksandrbogomolov.service.user;
 
 import com.aleksandrbogomolov.domain.User;
-import com.aleksandrbogomolov.repository.UserRepository;
+import com.aleksandrbogomolov.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

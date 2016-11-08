@@ -1,16 +1,19 @@
 package com.aleksandrbogomolov.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-public class UserMeal {
+@NoArgsConstructor
+@Document(collection = "meals")
+public class Meal {
 
     @Id
     private String id;
@@ -19,13 +22,13 @@ public class UserMeal {
 
     private String description;
 
-    private Integer calories;
+    private int calories;
 
     private User user;
 
     @Override
     public String toString() {
-        return "UserMeal{" +
+        return "Meal{" +
                "id='" + id + '\'' +
                ", dateTime=" + dateTime +
                ", description='" + description + '\'' +
