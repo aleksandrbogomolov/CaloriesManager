@@ -19,8 +19,8 @@ public class UserRestController {
     }
 
     @PostMapping
-    public void saveUser(@RequestBody User user) {
-        service.save(user);
+    public User saveUser(@RequestBody User user) {
+        return service.save(user);
     }
 
     @DeleteMapping("/{email:.+}")

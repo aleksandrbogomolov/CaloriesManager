@@ -18,13 +18,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        repository.save(user);
+    public User save(User user) {
+        return repository.save(user);
     }
 
     @Override
     public void delete(String email) {
-        repository.delete(email);
+        repository.deleteByEmail(email);
     }
 
     @Override
