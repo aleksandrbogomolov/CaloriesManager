@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface MealService {
 
-    MealTO save(Meal meal, String userId);
+    void save(Meal meal, String userId);
 
     void delete(String id);
 
-    MealTO findOne(String id);
+    Meal findOne(String id);
 
     List<MealTO> findAll();
 }

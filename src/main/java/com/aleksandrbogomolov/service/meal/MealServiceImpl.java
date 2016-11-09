@@ -26,9 +26,9 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public MealTO save(Meal meal, String userId) {
+    public void save(Meal meal, String userId) {
         meal.setUser(userRepository.findOneById(userId));
-        return convertToMealTO(repository.save(meal));
+        repository.save(meal);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public MealTO findOne(String id) {
-        return convertToMealTO(repository.findOne(id));
+    public Meal findOne(String id) {
+        return repository.findOne(id);
     }
 
     @Override

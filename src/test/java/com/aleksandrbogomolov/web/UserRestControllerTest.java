@@ -23,13 +23,9 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = "server.port=8888")
-public class UserRestControllerTest {
+public class UserRestControllerTest extends AbstractRestControllerTest {
 
-    private final String database = "calories-manager", host = "http://localhost:8888/user";
-
-    private final MongoClient mongo = new MongoClient("localhost", 27017);
-
-    private final MongoTemplate template = new MongoTemplate(mongo, database);
+    private final String host = "http://localhost:8888/user";
 
     private final User testUser1 = new User("1", "test1", "test1@mail.ru", "pass1", 2000, true, LocalDate.of(2016, 11, 7), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
 

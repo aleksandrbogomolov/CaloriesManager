@@ -22,8 +22,8 @@ public class MealRestController {
     }
 
     @PostMapping
-    public MealTO save(@RequestBody Meal meal, String userId) {
-        return service.save(meal, MealRestController.userId);
+    public void save(@RequestBody Meal meal, String userId) {
+        service.save(meal, MealRestController.userId);
     }
 
     @DeleteMapping("/{id}")
@@ -32,7 +32,7 @@ public class MealRestController {
     }
 
     @GetMapping("/{id}")
-    public MealTO getOne(@PathVariable String id) {
+    public Meal getOne(@PathVariable String id) {
         return service.findOne(id);
     }
 
