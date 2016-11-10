@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(String email) {
-        repository.deleteByEmail(email);
+        repository.deleteByName(email);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findOneByEmail(String email) {
-        return repository.findOneByEmail(email);
+    public User findOneByName(String email) {
+        return repository.findOneByName(email);
     }
 
     @Override

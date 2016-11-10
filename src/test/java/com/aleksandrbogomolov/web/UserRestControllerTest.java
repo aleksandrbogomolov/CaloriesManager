@@ -29,7 +29,7 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
         given().auth().basic(userName, userPassword)
                .contentType(ContentType.JSON).body(testUser1)
                .when().post(host)
-               .then().statusCode(200).body("name", equalTo("test1"));
+               .then().statusCode(200).body("name", equalTo("test"));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
         template.insert(testUser2);
         assertTrue(2 == template.getCollection("users").count());
         given().auth().basic(userName, userPassword)
-               .when().delete(host + "/test2@mail.ru")
+               .when().delete(host + "/test2")
                .then().statusCode(200);
         assertTrue(1 == template.getCollection("users").count());
     }
@@ -48,15 +48,15 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
         template.insert(testUser1);
         given().auth().basic(userName, userPassword)
                .when().get(host + "/" + testUser1.getId())
-               .then().statusCode(200).body("name", equalTo("test1"));
+               .then().statusCode(200).body("name", equalTo("test"));
     }
 
     @Test
-    public void getOneByEmail() throws Exception {
+    public void getOneByName() throws Exception {
         template.insert(testUser1);
         given().auth().basic(userName, userPassword)
-               .when().get(host + "/search/test1@mail.ru")
-               .then().statusCode(200).body("name", equalTo("test1"));
+               .when().get(host + "/search/test")
+               .then().statusCode(200).body("email", equalTo("test1@mail.ru"));
     }
 
     @Test
@@ -65,6 +65,6 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
         template.insert(testUser2);
         given().auth().basic(userName, userPassword)
                .when().get(host)
-               .then().statusCode(200).body("name", Matchers.hasItems("test1", "test2"));
+               .then().statusCode(200).body("name", Matchers.hasItems("test", "test2"));
     }
 }

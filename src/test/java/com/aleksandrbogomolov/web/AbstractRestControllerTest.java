@@ -35,7 +35,7 @@ abstract class AbstractRestControllerTest {
 
     private int startId = 1;
 
-    final User testUser1 = new User(String.valueOf(startId), "test1", "test1@mail.ru", "pass1", 2000, true, LocalDate.of(2016, 11, 7), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
+    final User testUser1 = new User(String.valueOf(startId), "test", "test1@mail.ru", "test", 2000, true, LocalDate.of(2016, 11, 7), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
 
     final User testUser2 = new User(String.valueOf(startId + 1), "test2", "test2@mail.ru", "pass2", 2000, true, LocalDate.of(2016, 11, 8), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
 

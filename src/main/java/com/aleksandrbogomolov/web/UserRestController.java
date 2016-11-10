@@ -33,9 +33,9 @@ public class UserRestController {
         return service.findOneById(String.valueOf(id));
     }
 
-    @GetMapping("/search/{email:.+}")
-    public User getOneByEmail(@PathVariable String email) {
-        return service.findOneByEmail(email);
+    @GetMapping("/search/{name}")
+    public User getOneByName(@PathVariable String name) {
+        return service.findOneByName(name);
     }
 
     @GetMapping

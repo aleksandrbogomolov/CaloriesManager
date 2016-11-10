@@ -3,6 +3,7 @@ package com.aleksandrbogomolov.web;
 import com.aleksandrbogomolov.domain.Meal;
 import com.aleksandrbogomolov.service.meal.MealService;
 import com.aleksandrbogomolov.to.MealTO;
+import com.aleksandrbogomolov.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,32 +13,33 @@ import java.util.List;
 @RequestMapping("/meal")
 public class MealRestController {
 
-    private static final String userId = "1";
-
     private final MealService service;
 
+    private final SecurityUtil util;
+
     @Autowired
-    public MealRestController(MealService service) {
+    public MealRestController(MealService service, SecurityUtil util) {
         this.service = service;
+        this.util = util;
     }
 
     @PostMapping
     public void save(@RequestBody Meal meal) {
-        service.save(meal, userId);
+        service.save(meal, util.getUserId());
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
-        service.delete(id, userId);
+        service.delete(id, util.getUserId());
     }
 
     @GetMapping("/{id}")
     public Meal getOne(@PathVariable String id) {
-        return service.findOne(id, userId);
+        return service.findOne(id, util.getUserId());
     }
 
     @GetMapping
     public List<MealTO> getAll() {
-        return service.findAll(userId);
+        return service.findAll(util.getUserId());
     }
 }

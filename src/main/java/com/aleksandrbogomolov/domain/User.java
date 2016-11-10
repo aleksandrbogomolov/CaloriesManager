@@ -21,6 +21,7 @@ public class User {
     @Id
     private String id;
 
+    @Indexed(unique = true)
     private String name;
 
     @Indexed(unique = true)
