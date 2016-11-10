@@ -41,12 +41,12 @@
 
 #myFooter .social-networks {
     text-align: center;
-    padding-top: 30px;
-    padding-bottom: 38px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #myFooter .social-networks a {
-    font-size: 32px;
+    font-size: 22px;
     margin-right: 5px;
     margin-left: 5px;
     color: #f9f9f9;
@@ -75,29 +75,4 @@
     #myFooter {
         text-align: center;
     }
-}
-
-/* CSS used for positioning the footer at the bottom of the page. */
-
-html {
-    height: 100% !important;
-}
-
-body {
-    display: flex;
-    display: -webkit-flex;
-    flex-direction: column;
-    -webkit-flex-direction: column;
-    height: 100%;
-}
-
-.content {
-    flex: 1 0 auto;
-    -webkit-flex: 1 0 auto;
-    min-height: 100px;
-}
-
-#myFooter {
-    flex: 0 0 auto;
-    -webkit-flex: 0 0 auto;
 }
