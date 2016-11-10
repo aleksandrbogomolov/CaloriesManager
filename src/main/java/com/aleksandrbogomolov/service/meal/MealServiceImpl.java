@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.aleksandrbogomolov.util.EntityConverter.convertToMealTO;
 import static com.aleksandrbogomolov.util.EntityConverter.getWithExceed;
 
 @Service
@@ -32,17 +31,17 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void delete(String id) {
-        repository.delete(id);
+    public void delete(String id, String userId) {
+        repository.deleteByIdAndUserId(id, userId);
     }
 
     @Override
-    public Meal findOne(String id) {
-        return repository.findOne(id);
+    public Meal findOne(String id, String userId) {
+        return repository.findOneByIdAndUserId(id, userId);
     }
 
     @Override
-    public List<MealTO> findAll() {
-        return getWithExceed(repository.findAllByUserId());
+    public List<MealTO> findAll(String userId) {
+        return getWithExceed(repository.findAllByUserId(userId));
     }
 }

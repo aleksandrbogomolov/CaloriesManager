@@ -9,9 +9,9 @@ public interface MealService {
 
     void save(Meal meal, String userId);
 
-    void delete(String id);
+    void delete(String id, String userId);
 
-    Meal findOne(String id);
+    Meal findOne(String id, String userId);
 
-    List<MealTO> findAll();
+    List<MealTO> findAll(String userId);
 }
