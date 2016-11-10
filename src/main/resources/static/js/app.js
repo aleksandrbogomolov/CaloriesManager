@@ -1,3 +1,3 @@
 'use strict';
 
-var App = angular.module('calories-manager', []);
+var app = angular.module('calories-manager', ['ngRoute', 'ngResource']);
