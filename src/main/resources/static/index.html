@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
     <title>Calories manager</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body ng-app="calories-manager">
 
-<a href="#/" class="btn btn-default">Home</a>
-<a href="#/users" class="btn btn-default">User</a>
-<a href="#/meals" class="btn btn-default">Meal</a>
+<div class="page-header">
+    <h1>Header</h1>
+</div>
 
-<div class="row">
-    <div ng-view></div>
+<div class="container">
+
+    <a href="#/" class="btn btn-default">Home</a>
+    <a href="#/users" class="btn btn-default">User</a>
+    <a href="#/meals" class="btn btn-default">Meal</a>
+
+    <div class="row">
+        <div ng-view></div>
+    </div>
+
+</div>
+
+<div class="content">
+    <footer id="myFooter">
+        <div class="social-networks">
+            <a href="@ksandr_ua" class="twitter"><i class="fa fa-twitter"></i></a>
+            <a href="https://ua.linkedin.com/in/aleksandr-bogomolov-081640116" class="linkedin"><i
+                    class="fa fa-linkedin"></i></a>
+            <a href="https://github.com/aleksandrbogomolov" class="github"><i class="fa fa-github"></i></a>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2016 Aleksandr Bogomolov </p>
+        </div>
+    </footer>
 </div>
 
 <script src="bower_components/angular/angular.min.js"></script>
