@@ -10,7 +10,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     User save(User user);
 
-    void deleteByName(String name);
+    void deleteById(String id);
 
     User findOneById(String id);
 

@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(String email) {
-        repository.deleteByName(email);
+    public void delete(String id) {
+        repository.deleteById(id);
     }
 
     @Override

@@ -23,9 +23,9 @@ public class UserRestController {
         return service.save(user);
     }
 
-    @DeleteMapping("/{email:.+}")
-    public void delete(@PathVariable String email) {
-        service.delete(email);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) {
+        service.delete(id);
     }
 
     @GetMapping("/{id}")

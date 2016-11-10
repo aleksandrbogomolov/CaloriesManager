@@ -38,7 +38,7 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
         template.insert(testUser2);
         assertTrue(2 == template.getCollection("users").count());
         given().auth().basic(userName, userPassword)
-               .when().delete(host + "/test2")
+               .when().delete(host + "/" + testUser2.getId())
                .then().statusCode(200);
         assertTrue(1 == template.getCollection("users").count());
     }

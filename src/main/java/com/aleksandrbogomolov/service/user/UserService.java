@@ -8,7 +8,7 @@ public interface UserService {
 
     User save(User user);
 
-    void delete(String email);
+    void delete(String id);
 
     User findOneById(String id);
 
