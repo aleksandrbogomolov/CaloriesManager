@@ -56,19 +56,7 @@
 
 #myFooter .social-networks a:hover {
     text-decoration: none;
-
-}
-
-#myFooter .github:hover {
     color: #0077e2;
-}
-
-#myFooter .linkedin:hover {
-    color: #ef1a1a;
-}
-
-#myFooter .twitter:hover {
-    color: #00aced;
 }
 
 @media screen and (max-width: 767px) {
