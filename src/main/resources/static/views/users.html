@@ -1,71 +1,4 @@
 <!--suppress HtmlFormInputWithoutLabel -->
-<div class="modal fade" id="edit-user">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title" id="modalTitle">User info</h2>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form" id="details-form" ng-submit="editSubmit()">
-                    <input type="text" id="id" name="id" ng-model="user.id">
-                    <input type="text" id="enabled" name="enabled" ng-model="user.enabled">
-                    <input type="text" id="roles" name="roles" ng-model="user.roles">
-
-                    <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">Name</label>
-
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name" ng-model="user.name">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="control-label col-xs-3">Email</label>
-
-                        <div class="col-xs-9">
-                            <input type="email" class="form-control" id="email" name="email" ng-model="user.email">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="caloriesPerDay" class="control-label col-xs-3">Calories per day</label>
-
-                        <div class="col-xs-9">
-                            <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay"
-                                   ng-model="user.caloriesPerDay">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="control-label col-xs-3">Password</label>
-
-                        <div class="col-xs-9">
-                            <input type="password" class="form-control" id="password" name="password"
-                                   ng-model="user.password">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="createdDate" class="control-label col-xs-3">Created date</label>
-
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="createdDate" name="createdDate"
-                                   ng-model="user.createdDate" readonly>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container">
     <table class="col-md-6 table">
         <tr>
@@ -87,8 +20,72 @@
             <td>{{u.enabled}}</td>
             <td>{{u.createdDate}}</td>
             <td>{{u.roles}}</td>
-            <td><a class="btn btn-info btn-sm" ng-click="editUser(u.id)">Edit</a></td>
+            <td><a class="btn btn-info btn-sm" ng-click="userDetails(u.id)">Edit</a></td>
             <td><a class="btn btn-danger btn-sm">Delete</a></td>
         </tr>
     </table>
+</div>
+
+<div class="modal fade" id="edit-user">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="modalTitle">User info</h2>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="details-form">
+                    <input type="text" id="id" name="id" hidden>
+                    <input type="text" id="enabled" name="enabled" hidden>
+                    <input type="text" id="roles" name="roles" hidden>
+
+                    <div class="form-group">
+                        <label for="name" class="control-label col-xs-3">Name</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="control-label col-xs-3">Email</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="caloriesPerDay" class="control-label col-xs-3">Calories per day</label>
+
+                        <div class="col-xs-9">
+                            <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="control-label col-xs-3">Password</label>
+
+                        <div class="col-xs-9">
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="createdDate" class="control-label col-xs-3">Created date</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="createdDate" name="createdDate" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <button ng-click="submitUser()" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

@@ -12,7 +12,7 @@ mongoDB.users.update(
         "name": "User",
         "email": "user@mail.ru",
         "password": "password",
-        "caloriesPerDay": "2000",
+        "caloriesPerDay": 2000,
         "enabled": true,
         "createdDate": new Date(),
         "roles": [
@@ -29,7 +29,7 @@ mongoDB.users.update(
         "name": "Admin",
         "email": "admin@mail.ru",
         "password": "admin",
-        "caloriesPerDay": "2500",
+        "caloriesPerDay": 2500,
         "enabled": true,
         "createdDate": new Date(),
         "roles": [
