@@ -1,5 +1,5 @@
 'use strict';
 
-app.controller('meals', ['$scope', function ($scope) {
+app.controller('meals', function ($scope, $http) {
     $scope.now = new Date();
-}]);
+});

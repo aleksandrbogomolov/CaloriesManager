@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 public class MealRestControllerTest extends AbstractRestControllerTest {
 
-    private final String host = "http://localhost:8888/meal";
+    private final String host = "http://localhost:8888/meals";
 
     @Before
     public void setUp() throws Exception {

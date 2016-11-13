@@ -2,7 +2,7 @@
 
 app.controller('users', function ($scope, $http) {
 
-    var userUrl = '/user';
+    var userUrl = '/users';
 
     $scope.getAll = function () {
         $http.get(userUrl).then(function (users) {

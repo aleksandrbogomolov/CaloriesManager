@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class UserRestControllerTest extends AbstractRestControllerTest {
 
-    private final String host = "http://localhost:8888/user";
+    private final String host = "http://localhost:8888/users";
 
     @Before
     public void setUp() throws Exception {
