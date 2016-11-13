@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class MongoDB {
+public class MongoConfiguration {
 
     private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public MongoDB(MongoTemplate mongoTemplate) {
+    public MongoConfiguration(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 }
