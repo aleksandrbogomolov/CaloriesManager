@@ -29,8 +29,8 @@ public class UserRestController {
     }
 
     @GetMapping("/{id}")
-    public User getOneById(@PathVariable int id) {
-        return service.findOneById(String.valueOf(id));
+    public User getOneById(@PathVariable String id) {
+        return service.findOneById(id);
     }
 
     @GetMapping("/search/{name}")

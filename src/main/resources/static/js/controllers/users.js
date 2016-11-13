@@ -28,7 +28,11 @@ app.controller('users', function ($scope, $http) {
             user[tmp[0]] = tmp[1];
             if (tmp[0] == 'email') user[tmp[0]] = tmp[1].replace('%40', '@');
             if (tmp[0] == 'roles') user[tmp[0]] = tmp[1].split('%2C');
-            if (tmp[0] == 'createdDate') user[tmp[0]] = tmp[1].replace(/%2C/g, '-');
+            if (tmp[0] == 'createdDate') {
+                var str = tmp[1].replace(/%2C/g, '-');
+                if (str.length < 10) str = [str.slice(0, 8), '0', str.slice(8)].join('');
+                user[tmp[0]] = str;
+            }
         });
         $http.post(userUrl, user).then(function () {
             angular.element('#edit-user').modal('hide');
