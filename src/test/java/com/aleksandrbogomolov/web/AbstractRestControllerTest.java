@@ -3,8 +3,8 @@ package com.aleksandrbogomolov.web;
 import com.aleksandrbogomolov.domain.Meal;
 import com.aleksandrbogomolov.domain.Role;
 import com.aleksandrbogomolov.domain.User;
-import com.mongodb.MongoClient;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -27,11 +27,9 @@ abstract class AbstractRestControllerTest {
     @Value("#{securityProperties.user.password}")
     String userPassword;
 
-    private final String database = "calories-manager";
-
-    private final MongoClient mongo = new MongoClient("localhost", 27017);
-
-    final MongoTemplate template = new MongoTemplate(mongo, database);
+    @SuppressWarnings("SpringJavaAutowiredMembersInspection")
+    @Autowired
+    MongoTemplate template;
 
     private int startId = 1;
 
