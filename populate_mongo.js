@@ -1,6 +1,7 @@
 var mongoDB = db.getSiblingDB("calories-manager");
 
 mongoDB.createCollection("users");
+mongoDB.createCollection("meals");
 
 print('populate mongodb');
 
@@ -36,6 +37,30 @@ mongoDB.users.update(
             "ROLE_USER",
             "ROLE_ADMIN"
         ]
+    }, {"upsert": true}
+);
+
+mongoDB.meals.update(
+    {"description": "Завтрак"},
+    {
+        "_id": "3",
+        "_class": "com.aleksandrbogomolov.domain.Meal",
+        "dateTime": "11/10/16 8:08:00 AM UTC",
+        "description": "Завтрак",
+        "calories": 500,
+        "user": {"$ref": "users", "$id": "1"}
+    }, {"upsert": true}
+);
+
+mongoDB.meals.update(
+    {"description": "Обед"},
+    {
+        "_id": "4",
+        "_class": "com.aleksandrbogomolov.domain.Meal",
+        "dateTime": "11/10/16 8:08:00 AM UTC",
+        "description": "Обед",
+        "calories": 1000,
+        "user": {"$ref": "users", "$id": "1"}
     }, {"upsert": true}
 );
 

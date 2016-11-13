@@ -34,9 +34,8 @@ public class MealRestControllerTest extends AbstractRestControllerTest {
                .contentType(ContentType.JSON).body(testMeal1)
                .when().post(host)
                .then().statusCode(200);
-        Query query = new Query(Criteria.where("_id").is(testMeal1.getId()));
         assertTrue(1 == template.getCollection("meals").count());
-        assertTrue(testMeal1.equals(template.findOne(query, Meal.class)));
+        assertTrue(testMeal1.equals(template.findOne(new Query(Criteria.where("_id").is(testMeal1.getId())), Meal.class)));
     }
 
     @Test
