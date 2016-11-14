@@ -1,10 +1,14 @@
 'use strict';
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $httpProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',
             controller: 'home'
+        })
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'login'
         })
         .when('/users', {
             templateUrl: 'views/users.html',
@@ -14,4 +18,5 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/meals.html',
             controller: 'meals'
         });
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 });

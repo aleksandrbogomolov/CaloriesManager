@@ -5,6 +5,7 @@ import com.aleksandrbogomolov.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -16,6 +17,11 @@ public class UserRestController {
     @Autowired
     public UserRestController(UserService service) {
         this.service = service;
+    }
+
+    @GetMapping("/login")
+    public Principal getOneByName(Principal user) {
+        return user;
     }
 
     @PostMapping
@@ -31,11 +37,6 @@ public class UserRestController {
     @GetMapping("/{id}")
     public User getOneById(@PathVariable String id) {
         return service.findOneById(id);
-    }
-
-    @GetMapping("/search/{name}")
-    public User getOneByName(@PathVariable String name) {
-        return service.findOneByName(name);
     }
 
     @GetMapping

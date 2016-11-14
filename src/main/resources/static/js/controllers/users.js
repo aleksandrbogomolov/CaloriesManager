@@ -2,17 +2,17 @@
 
 app.controller('users', function ($scope, $http) {
 
-    var userUrl = '/users';
+    var usersUrl = '/users';
 
     $scope.getAll = function () {
-        $http.get(userUrl).then(function (users) {
+        $http.get(usersUrl).then(function (users) {
             $scope.users = users.data;
         });
     };
 
     $scope.userDetails = function (id) {
         var form = angular.element('#edit-user');
-        $http.get(userUrl + '/' + id).then(function (user) {
+        $http.get(usersUrl + '/' + id).then(function (user) {
             angular.forEach(user.data, function (value, key) {
                 form.find("input[name='" + key + "']").val(value);
             })
@@ -34,7 +34,7 @@ app.controller('users', function ($scope, $http) {
                 user[tmp[0]] = str;
             }
         });
-        $http.post(userUrl, user).then(function () {
+        $http.post(usersUrl, user).then(function () {
             angular.element('#edit-user').modal('hide');
             angular.element('.table').val('');
             $scope.getAll();
@@ -42,7 +42,7 @@ app.controller('users', function ($scope, $http) {
     };
 
     $scope.deleteUser = function (id) {
-        $http.delete(userUrl + '/' + id).then(function () {
+        $http.delete(usersUrl + '/' + id).then(function () {
             angular.element('.table').val('');
             $scope.getAll();
         })

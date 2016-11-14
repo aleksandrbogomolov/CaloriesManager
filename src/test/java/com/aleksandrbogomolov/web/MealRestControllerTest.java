@@ -1,6 +1,7 @@
 package com.aleksandrbogomolov.web;
 
 import com.aleksandrbogomolov.domain.Meal;
+import com.aleksandrbogomolov.domain.User;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -15,12 +16,12 @@ import static org.junit.Assert.assertTrue;
 
 public class MealRestControllerTest extends AbstractRestControllerTest {
 
-    private final String host = "http://localhost:8888/meals";
+    private final String url = "http://localhost:8888/meals";
 
     @Before
     public void setUp() throws Exception {
-        if (!template.collectionExists("users")) template.createCollection("users");
-        template.save(testUser1);
+        if (!template.exists(new Query(Criteria.where("name").is(loggedUser.getName())), User.class))
+            template.save(loggedUser);
     }
 
     @After
@@ -30,9 +31,9 @@ public class MealRestControllerTest extends AbstractRestControllerTest {
 
     @Test
     public void save() throws Exception {
-        given().auth().basic(userName, userPassword)
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
                .contentType(ContentType.JSON).body(testMeal1)
-               .when().post(host)
+               .when().post(url)
                .then().statusCode(200);
         assertTrue(1 == template.getCollection("meals").count());
         assertTrue(testMeal1.equals(template.findOne(new Query(Criteria.where("_id").is(testMeal1.getId())), Meal.class)));
@@ -43,8 +44,8 @@ public class MealRestControllerTest extends AbstractRestControllerTest {
         template.save(testMeal1);
         template.save(testMeal2);
         assertTrue(2 == template.getCollection("meals").count());
-        given().auth().basic(userName, userPassword)
-               .when().delete(host + "/" + testMeal1.getId())
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .when().delete(url + "/" + testMeal1.getId())
                .then().statusCode(200);
         assertTrue(1 == template.getCollection("meals").count());
     }
@@ -52,8 +53,8 @@ public class MealRestControllerTest extends AbstractRestControllerTest {
     @Test
     public void getOne() throws Exception {
         template.save(testMeal1);
-        given().auth().basic(userName, userPassword)
-               .when().get(host + "/" + testMeal1.getId())
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .when().get(url + "/" + testMeal1.getId())
                .then().statusCode(200).body("description", equalTo("Завтрак"));
     }
 
@@ -61,8 +62,8 @@ public class MealRestControllerTest extends AbstractRestControllerTest {
     public void getAll() throws Exception {
         template.save(testMeal1);
         template.save(testMeal2);
-        given().auth().basic(userName, userPassword)
-               .when().get(host)
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .when().get(url)
                .then().statusCode(200).body("description", Matchers.hasItems("Завтрак", "Обед"));
     }
 }

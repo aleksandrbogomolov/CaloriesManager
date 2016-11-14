@@ -5,8 +5,6 @@ import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -14,11 +12,12 @@ import static org.junit.Assert.assertTrue;
 
 public class UserRestControllerTest extends AbstractRestControllerTest {
 
-    private final String host = "http://localhost:8888/users";
+    private final String url = "http://localhost:8888/users";
 
     @Before
     public void setUp() throws Exception {
         if (template.collectionExists("users")) template.dropCollection("users");
+        template.save(loggedUser);
     }
 
     @After
@@ -28,9 +27,9 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
 
     @Test
     public void saveUser() throws Exception {
-        given().auth().basic(userName, userPassword)
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
                .contentType(ContentType.JSON).body(testUser1)
-               .when().post(host)
+               .when().post(url)
                .then().statusCode(200).body("name", equalTo("test"));
     }
 
@@ -38,35 +37,27 @@ public class UserRestControllerTest extends AbstractRestControllerTest {
     public void delete() throws Exception {
         template.insert(testUser1);
         template.insert(testUser2);
-        assertTrue(2 == template.getCollection("users").count());
-        given().auth().basic(userName, userPassword)
-               .when().delete(host + "/" + testUser2.getId())
+        assertTrue(3 == template.getCollection("users").count());
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .when().delete(url + "/" + testUser2.getId())
                .then().statusCode(200);
-        assertTrue(1 == template.getCollection("users").count());
+        assertTrue(2 == template.getCollection("users").count());
     }
 
     @Test
     public void getOneById() throws Exception {
         template.insert(testUser1);
-        given().auth().basic(userName, userPassword)
-               .when().get(host + "/" + testUser1.getId())
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .when().get(url + "/" + testUser1.getId())
                .then().statusCode(200).body("name", equalTo("test"));
-    }
-
-    @Test
-    public void getOneByName() throws Exception {
-        template.insert(testUser1);
-        given().auth().basic(userName, userPassword)
-               .when().get(host + "/search/test")
-               .then().statusCode(200).body("email", equalTo("test1@mail.ru"));
     }
 
     @Test
     public void getAll() throws Exception {
         template.insert(testUser1);
         template.insert(testUser2);
-        given().auth().basic(userName, userPassword)
-               .when().get(host)
-               .then().statusCode(200).body("name", Matchers.hasItems("test", "test2"));
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .when().get(url)
+               .then().statusCode(200).body("name", Matchers.hasItems("User", "test", "test2"));
     }
 }

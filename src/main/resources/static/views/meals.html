@@ -1,1 +1,20 @@
-{{now | date:'medium'}}
+<div class="container">
+    <table class="col-md-6 table">
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Date time</th>
+            <th>Calories</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="m in meals">
+            <td>{{m.id}}</td>
+            <td>{{m.description}}</td>
+            <td>{{m.dateTime}}</td>
+            <td>{{m.calories}}</td>
+            <td><a class="btn btn-info btn-sm">Edit</a></td>
+            <td><a class="btn btn-danger btn-sm">Delete</a></td>
+        </tr>
+    </table>
+</div>
