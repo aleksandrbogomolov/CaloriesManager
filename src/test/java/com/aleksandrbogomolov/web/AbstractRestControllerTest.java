@@ -18,6 +18,7 @@ import java.util.HashSet;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = "server.port=8888")
+@TestPropertySource(locations = "classpath:test.properties")
 abstract class AbstractRestControllerTest {
 
     @SuppressWarnings("SpringJavaAutowiredMembersInspection")
