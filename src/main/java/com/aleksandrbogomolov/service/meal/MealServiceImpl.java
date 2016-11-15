@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.aleksandrbogomolov.util.EntityConverter.getWithExceed;
+import static com.aleksandrbogomolov.util.converters.EntityConverter.getWithExceed;
 
 @Service
 public class MealServiceImpl implements MealService {
