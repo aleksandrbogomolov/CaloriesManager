@@ -5,7 +5,6 @@
 }
 
 .navbar-header {
-
     -webkit-transform-style: preserve-3d;
 
     -moz-transform-style: preserve-3d;
@@ -16,36 +15,24 @@
 }
 
 .navbar-nav > li > .dropdown-menu {
-
     z-index: 9999;
 }
 
 /*Footer*/
 
 #myFooter {
-    background-color: #373a48;
-    color: white;
-}
-
-#myFooter .footer-copyright {
     background-color: #383737;
     padding-top: 3px;
     padding-bottom: 3px;
     text-align: center;
 }
 
-#myFooter .footer-copyright p {
+#myFooter p {
     margin: 10px;
     color: #ccc;
 }
 
-#myFooter .social-networks {
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-#myFooter .social-networks a {
+#myFooter a {
     font-size: 22px;
     margin-right: 5px;
     margin-left: 5px;
@@ -54,7 +41,7 @@
     transition: 0.2s;
 }
 
-#myFooter .social-networks a:hover {
+#myFooter a:hover {
     text-decoration: none;
     color: #0077e2;
 }
