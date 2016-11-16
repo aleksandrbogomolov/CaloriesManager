@@ -45,7 +45,7 @@ mongoDB.meals.update(
     {
         "_id": "3",
         "_class": "com.aleksandrbogomolov.domain.Meal",
-        "dateTime": "2016-11-10 08:08:00",
+        "dateTime": new Date("2016-11-16T07:25:50"),
         "description": "Завтрак",
         "calories": 500,
         "user": {"$ref": "users", "$id": "1"}
@@ -57,7 +57,7 @@ mongoDB.meals.update(
     {
         "_id": "4",
         "_class": "com.aleksandrbogomolov.domain.Meal",
-        "dateTime": "2016-11-10 12:08:00",
+        "dateTime": new Date("2016-11-16T12:25:50"),
         "description": "Обед",
         "calories": 1000,
         "user": {"$ref": "users", "$id": "1"}
