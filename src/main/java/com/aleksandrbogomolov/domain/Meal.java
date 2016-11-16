@@ -21,7 +21,6 @@ public class Meal {
     @Id
     private String id;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime;
 
     private String description;
