@@ -4,6 +4,7 @@
     "angular": "1.5.8",
     "angular-route": "1.5.8",
     "angular-resource": "1.5.8",
+    "angular-smart-table": "",
     "bootstrap": "3.3.7"
   }
 }
