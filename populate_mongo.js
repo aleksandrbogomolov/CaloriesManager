@@ -41,7 +41,7 @@ mongoDB.users.update(
 );
 
 mongoDB.meals.update(
-    {"description": "Завтрак"},
+    {"_id": "3"},
     {
         "_id": "3",
         "_class": "com.aleksandrbogomolov.domain.Meal",
@@ -53,7 +53,7 @@ mongoDB.meals.update(
 );
 
 mongoDB.meals.update(
-    {"description": "Обед"},
+    {"_id": "4"},
     {
         "_id": "4",
         "_class": "com.aleksandrbogomolov.domain.Meal",

@@ -12,7 +12,7 @@ app.controller('meals', function ($scope, $http) {
                 var meal = {};
                 angular.forEach(value, function (data, key) {
                     meal[key] = data;
-                    if (key == 'dateTime') meal[key] = parseDate(data);
+                    if (key == 'dateTime') meal[key] = moment(parseDate(data)).format('YYYY-MM-DD hh:mm');
                 });
                 mealsCollection.push(meal);
             });
@@ -24,7 +24,7 @@ app.controller('meals', function ($scope, $http) {
         var form = angular.element('#edit-meal');
         $http.get(mealsUrl + '/' + id).then(function (meal) {
             angular.forEach(meal.data, function (value, key) {
-                form.find("input[name='" + key + "']").val(key == 'dateTime' ? parseDate(value) : value);
+                form.find("input[name='" + key + "']").val(key == 'dateTime' ? moment(parseDate(value)).format('YYYY-MM-DD hh:mm') : value);
             })
         });
         form.modal();
@@ -35,12 +35,7 @@ app.controller('meals', function ($scope, $http) {
         var form = angular.element('#details-form').serialize().split('&');
         angular.forEach(form, function (value) {
             var tmp = value.split('=');
-            meal[tmp[0]] = tmp[1];
-            if (tmp[0] == 'createdDate') {
-                var str = tmp[1].replace(/%2C/g, '-').replace(' ', 'T');
-                if (str.length < 10) str = [str.slice(0, 8), '0', str.slice(8)].join('');
-                meal[tmp[0]] = str;
-            }
+            meal[tmp[0]] = tmp[0] == 'dateTime' ? decodeURIComponent(tmp[1]).replace(' ', 'T') : decodeURIComponent(tmp[1]);
         });
         $http.post(mealsUrl, meal).then(function () {
             angular.element('#edit-meal').modal('hide');
