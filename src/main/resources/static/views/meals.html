@@ -1,21 +1,22 @@
+<!--suppress ALL -->
 <div class="container">
-    <table st-table="meals" class="col-md-6 table">
+    <table st-table="displayedCollection" st-safe-src="rowCollection" class="col-md-6 table">
         <thead>
         <tr>
-            <th>Description</th>
-            <th st-sort="getters.dateTime">Date time</th>
-            <th st-sort="getters.calories">Calories</th>
+            <th st-sort="description">Description</th>
+            <th st-sort="dateTime">Date time</th>
+            <th st-sort="calories">Calories</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="m in meals">
-            <td>{{m.description}}</td>
-            <td>{{m.dateTime}}</td>
-            <td>{{m.calories}}</td>
-            <td><a class="btn btn-info btn-sm" ng-click="mealDetails(m.id)">Edit</a></td>
-            <td><a class="btn btn-danger btn-sm" ng-click="deleteMeal(m.id)">Delete</a></td>
+        <tr ng-repeat="row in displayedCollection">
+            <td>{{row.description}}</td>
+            <td>{{row.dateTime}}</td>
+            <td>{{row.calories}}</td>
+            <td><a class="btn btn-info btn-sm" ng-click="mealDetails(row.id)">Edit</a></td>
+            <td><a class="btn btn-danger btn-sm" ng-click="deleteMeal(row.id)">Delete</a></td>
         </tr>
         </tbody>
     </table>

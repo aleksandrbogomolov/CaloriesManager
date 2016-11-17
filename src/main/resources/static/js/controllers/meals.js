@@ -14,7 +14,7 @@ app.controller('meals', function ($scope, $http) {
                 });
                 mealsCollection.push(meal);
             });
-            $scope.meals = mealsCollection;
+            $scope.rowCollection = mealsCollection;
         })
     };
 
@@ -48,21 +48,12 @@ app.controller('meals', function ($scope, $http) {
         })
     };
 
-    $scope.getters = {
-        dateTime: function (value) {
-            return value.dateTime.getDate();
-        },
-        calories: function (value) {
-            return value.calories;
-        }
-    };
-
     var parseDate = function (data) {
         var month = data[1].toString().length == 1 ? '0' + data[1] : data[1];
         var day = data[2].toString().length == 1 ? '0' + data[2] : data[2];
         var hour = data[3].toString().length == 1 ? '0' + data[3] : data[3];
         var minutes = data[4].toString().length == 1 ? '0' + data[4] : data[4];
-        return data[0] + '-' + month + '-' + day + ' ' + hour +':' + minutes;
+        return data[0] + '-' + month + '-' + day + ' ' + hour + ':' + minutes;
     };
 
     $scope.getAll();
