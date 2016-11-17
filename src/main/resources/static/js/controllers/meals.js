@@ -2,17 +2,15 @@
 
 app.controller('meals', function ($scope, $http) {
 
-    var mealsCollection = [];
-
     var mealsUrl = '/meals';
 
     $scope.getAll = function () {
+        var mealsCollection = [];
         $http.get(mealsUrl).then(function (meals) {
             angular.forEach(meals.data, function (value) {
                 var meal = {};
                 angular.forEach(value, function (data, key) {
-                    meal[key] = data;
-                    if (key == 'dateTime') meal[key] = moment(parseDate(data)).format('YYYY-MM-DD hh:mm');
+                    meal[key] = key != 'dateTime' ? data : parseDate(data);
                 });
                 mealsCollection.push(meal);
             });
@@ -24,7 +22,7 @@ app.controller('meals', function ($scope, $http) {
         var form = angular.element('#edit-meal');
         $http.get(mealsUrl + '/' + id).then(function (meal) {
             angular.forEach(meal.data, function (value, key) {
-                form.find("input[name='" + key + "']").val(key == 'dateTime' ? moment(parseDate(value)).format('YYYY-MM-DD hh:mm') : value);
+                form.find("input[name='" + key + "']").val(key != 'dateTime' ? value : parseDate(value));
             })
         });
         form.modal();
@@ -35,11 +33,10 @@ app.controller('meals', function ($scope, $http) {
         var form = angular.element('#details-form').serialize().split('&');
         angular.forEach(form, function (value) {
             var tmp = value.split('=');
-            meal[tmp[0]] = tmp[0] == 'dateTime' ? decodeURIComponent(tmp[1]).replace(' ', 'T') : decodeURIComponent(tmp[1]);
+            meal[tmp[0]] = tmp[0] != 'dateTime' ? decodeURIComponent(tmp[1]) : decodeURIComponent(tmp[1]).replace(' ', 'T');
         });
         $http.post(mealsUrl, meal).then(function () {
             angular.element('#edit-meal').modal('hide');
-            angular.element('.table').val('');
             $scope.getAll();
         });
     };
@@ -61,7 +58,11 @@ app.controller('meals', function ($scope, $http) {
     };
 
     var parseDate = function (data) {
-        return new Date(data[0], data[1], data[2], data[3], data[4])
+        var month = data[1].toString().length == 1 ? '0' + data[1] : data[1];
+        var day = data[2].toString().length == 1 ? '0' + data[2] : data[2];
+        var hour = data[3].toString().length == 1 ? '0' + data[3] : data[3];
+        var minutes = data[4].toString().length == 1 ? '0' + data[4] : data[4];
+        return data[0] + '-' + month + '-' + day + ' ' + hour +':' + minutes;
     };
 
     $scope.getAll();
