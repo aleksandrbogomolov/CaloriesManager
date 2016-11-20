@@ -1,12 +1,14 @@
 package com.aleksandrbogomolov.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Document(collection = "meals")
 @CompoundIndex(name = "user_date_time", def = "{'user': 1, 'dateTime': 1}")
-public class Meal {
+public class Meal implements Persistable<String> {
 
     @Id
     private String id;
@@ -65,4 +67,7 @@ public class Meal {
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public boolean isNew() { return getId().equals(""); }
 }

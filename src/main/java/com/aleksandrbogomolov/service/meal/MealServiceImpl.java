@@ -26,6 +26,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public void save(Meal meal, String userId) {
+        if (meal.isNew()) meal.setId(null);
         meal.setUser(userRepository.findOneById(userId));
         repository.save(meal);
     }

@@ -26,7 +26,10 @@ app.controller('meals', function ($scope, $http) {
                     form.find("input[name='" + key + "']").val(key != 'dateTime' ? value : parseDate(value));
                 })
             });
-        } else form.find('input', 'textarea').val('');
+        } else {
+            form.find('input', 'textarea').val('');
+            form.find("input[name='id']").val(null);
+        }
         form.modal();
     };
 
