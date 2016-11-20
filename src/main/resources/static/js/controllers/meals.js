@@ -4,6 +4,8 @@ app.controller('meals', function ($scope, $http) {
 
     var mealsUrl = '/meals';
 
+    $scope.format = 'yyyy-MM-dd HH:mm';
+
     $scope.getAll = function () {
         var mealsCollection = [];
         $http.get(mealsUrl).then(function (meals) {

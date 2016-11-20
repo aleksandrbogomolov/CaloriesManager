@@ -61,3 +61,11 @@
 .st-sort-descent:before{
     content: '\25BC';
 }
+
+.dropdown a {
+    color: black;
+}
+
+.dropdown a:hover {
+    color: black;
+}
