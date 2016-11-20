@@ -4,8 +4,6 @@ app.controller('meals', function ($scope, $http) {
 
     var mealsUrl = '/meals';
 
-    $scope.format = 'yyyy-MM-dd HH:mm';
-
     $scope.getAll = function () {
         var mealsCollection = [];
         $http.get(mealsUrl).then(function (meals) {
@@ -20,13 +18,15 @@ app.controller('meals', function ($scope, $http) {
         })
     };
 
-    $scope.mealDetails = function (id) {
+    $scope.mealDetails = function (id, isNew) {
         var form = angular.element('#edit-meal');
-        $http.get(mealsUrl + '/' + id).then(function (meal) {
-            angular.forEach(meal.data, function (value, key) {
-                form.find("input[name='" + key + "']").val(key != 'dateTime' ? value : parseDate(value));
-            })
-        });
+        if (!isNew) {
+            $http.get(mealsUrl + '/' + id).then(function (meal) {
+                angular.forEach(meal.data, function (value, key) {
+                    form.find("input[name='" + key + "']").val(key != 'dateTime' ? value : parseDate(value));
+                })
+            });
+        } else form.find('input', 'textarea').val('');
         form.modal();
     };
 

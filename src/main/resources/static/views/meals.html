@@ -1,5 +1,80 @@
 <!--suppress ALL -->
 <div class="container">
+    <h4>Filter meals</h4>
+    <form class="form-inline">
+        <div class="dropdown form-group">
+            <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown">
+                <label for="start-date" class="control-label">Start date</label>
+                <div>
+                    <input type="text" name="start-date" id="start-date" class="form-control"
+                           data-ng-model="startDate" data-date-time-input="YYYY-MM-DD"/>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="startDate"
+                                data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdown3' }"/>
+            </ul>
+        </div>
+
+        <div class="dropdown form-group">
+            <a class="dropdown-toggle" id="dropdown5" role="button" data-toggle="dropdown">
+                <label for="end-date" class="control-label">End date</label>
+                <div>
+                    <input type="text" name="end-date" id="end-date" class="form-control"
+                           data-ng-model="endDate" data-date-time-input="YYYY-MM-DD"/>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="endDate"
+                                data-datetimepicker-config="{ startView:'day', minView:'day', dropdownSelector: '#dropdown5' }"/>
+            </ul>
+        </div>
+
+        <div class="dropdown form-group">
+            <a class="dropdown-toggle" id="dropdown4" role="button" data-toggle="dropdown">
+                <label for="start-time" class="control-label">Start time</label>
+                <div>
+                    <input type="text" name="start-time" id="start-time" class="form-control"
+                           data-ng-model="startTime" data-date-time-input="HH:mm"/>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="startTime"
+                                data-datetimepicker-config="{ startView:'hour', minView:'minute', dropdownSelector: '#dropdown4' }"/>
+            </ul>
+        </div>
+
+        <div class="dropdown form-group">
+            <a class="dropdown-toggle" id="dropdown6" role="button" data-toggle="dropdown">
+                <label for="end-time" class="control-label">End time</label>
+                <div>
+                    <input type="text" name="end-time" id="end-time" class="form-control"
+                           data-ng-model="endTime" data-date-time-input="HH:mm"/>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="endTime"
+                                data-datetimepicker-config="{ startView:'hour', minView:'minute', dropdownSelector: '#dropdown6' }"/>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <br>
+            <button class="btn btn-default form-control" ng-click="">Filter</button>
+        </div>
+
+        <div class="form-group pull-right">
+            <label for="create" class="control-label">Add meal</label>
+            <div>
+                <input type="button" id="create" class="btn btn-success" value="Create"
+                       ng-click="mealDetails(null, true)"/>
+            </div>
+        </div>
+    </form>
+</div>
+<br>
+
+<div class="container">
     <table st-table="displayedCollection" st-safe-src="rowCollection" class="col-md-6 table">
         <thead>
         <tr>
@@ -15,8 +90,8 @@
             <td>{{row.description}}</td>
             <td>{{row.dateTime}}</td>
             <td>{{row.calories}}</td>
-            <td><a class="btn btn-info btn-sm" ng-click="mealDetails(row.id)">Edit</a></td>
-            <td><a class="btn btn-danger btn-sm" ng-click="deleteMeal(row.id)">Delete</a></td>
+            <td><a class="btn btn-info btn-sm pull-right" ng-click="mealDetails(row.id, false)">Edit</a></td>
+            <td><a class="btn btn-danger btn-sm pull-right" ng-click="deleteMeal(row.id)">Delete</a></td>
         </tr>
         </tbody>
     </table>
