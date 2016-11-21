@@ -5,16 +5,15 @@ app.controller('meals', function ($scope, $http) {
     var mealsUrl = '/meals';
 
     $scope.getAll = function () {
-        var mealsCollection = [];
         $http.get(mealsUrl).then(function (meals) {
-            angular.forEach(meals.data, function (value) {
-                var meal = {};
-                angular.forEach(value, function (data, key) {
-                    meal[key] = key != 'dateTime' ? data : parseDate(data);
-                });
-                mealsCollection.push(meal);
-            });
-            $scope.rowCollection = mealsCollection;
+            updateTable(meals);
+        })
+    };
+
+    $scope.getFiltered = function () {
+        var form = angular.element('#filter-form').serialize();
+        $http.get(mealsUrl + '/' + 'filter?' + decodeURIComponent(form)).then(function (meals) {
+            updateTable(meals);
         })
     };
 
@@ -28,7 +27,6 @@ app.controller('meals', function ($scope, $http) {
             });
         } else {
             form.find('input', 'textarea').val('');
-            form.find("input[name='id']").val(null);
         }
         form.modal();
     };
@@ -59,6 +57,18 @@ app.controller('meals', function ($scope, $http) {
         var hour = data[3].toString().length == 1 ? '0' + data[3] : data[3];
         var minutes = data[4].toString().length == 1 ? '0' + data[4] : data[4];
         return data[0] + '-' + month + '-' + day + ' ' + hour + ':' + minutes;
+    };
+
+    var updateTable = function (meals) {
+        var mealsCollection = [];
+        angular.forEach(meals.data, function (value) {
+            var meal = {};
+            angular.forEach(value, function (data, key) {
+                meal[key] = key != 'dateTime' ? data : parseDate(data);
+            });
+            mealsCollection.push(meal);
+        });
+        $scope.rowCollection = mealsCollection;
     };
 
     $scope.getAll();

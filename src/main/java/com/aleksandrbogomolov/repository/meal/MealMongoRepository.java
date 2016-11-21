@@ -1,13 +1,13 @@
 package com.aleksandrbogomolov.repository.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
-import com.aleksandrbogomolov.domain.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
-public interface MealRepository {
+@SuppressWarnings("unchecked")
+public interface MealMongoRepository extends MongoRepository<Meal, String> {
 
     Meal save(Meal meal);
 
@@ -16,6 +16,4 @@ public interface MealRepository {
     Meal findOneByIdAndUserId(String id, String userId);
 
     List<Meal> findAllByUserId(String userId);
-
-    List<Meal> findFiltered(LocalDate startD, LocalDate endD, LocalTime startT, LocalTime endT, User user);
 }

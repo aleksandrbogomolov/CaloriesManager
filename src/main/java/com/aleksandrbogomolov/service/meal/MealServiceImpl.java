@@ -1,12 +1,15 @@
 package com.aleksandrbogomolov.service.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
+import com.aleksandrbogomolov.repository.meal.MealMongoRepository;
 import com.aleksandrbogomolov.repository.meal.MealRepository;
 import com.aleksandrbogomolov.repository.user.UserRepository;
 import com.aleksandrbogomolov.to.MealTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.aleksandrbogomolov.util.converters.EntityConverter.getWithExceed;
@@ -44,5 +47,10 @@ public class MealServiceImpl implements MealService {
     @Override
     public List<MealTO> findAll(String userId) {
         return getWithExceed(repository.findAllByUserId(userId));
+    }
+
+    @Override
+    public List<MealTO> findFiltered(LocalDate startD, LocalDate endD, LocalTime startT, LocalTime endT, String userId) {
+        return getWithExceed(repository.findFiltered(startD, endD, startT, endT, userRepository.findOneById(userId)));
     }
 }
