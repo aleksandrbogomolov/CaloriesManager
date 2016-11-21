@@ -1,9 +1,9 @@
 package com.aleksandrbogomolov.web;
 
+import com.aleksandrbogomolov.configuration.SecurityConfiguration;
 import com.aleksandrbogomolov.domain.Meal;
 import com.aleksandrbogomolov.service.meal.MealService;
 import com.aleksandrbogomolov.to.MealTO;
-import com.aleksandrbogomolov.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -20,32 +20,32 @@ public class MealRestController {
 
     private final MealService service;
 
-    private final SecurityUtil util;
+    private final SecurityConfiguration security;
 
     @Autowired
-    public MealRestController(MealService service, SecurityUtil util) {
+    public MealRestController(MealService service, SecurityConfiguration security) {
         this.service = service;
-        this.util = util;
+        this.security = security;
     }
 
     @PostMapping
     public void save(@RequestBody Meal meal) {
-        service.save(meal, util.getUserId());
+        service.save(meal, security.getUserId());
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
-        service.delete(id, util.getUserId());
+        service.delete(id, security.getUserId());
     }
 
     @GetMapping("/{id}")
     public Meal getOne(@PathVariable String id) {
-        return service.findOne(id, util.getUserId());
+        return service.findOne(id, security.getUserId());
     }
 
     @GetMapping
     public List<MealTO> getAll() {
-        return service.findAll(util.getUserId());
+        return service.findAll(security.getUserId());
     }
 
     @GetMapping("/filter")
@@ -59,6 +59,6 @@ public class MealRestController {
                 ofNullable(endDate).orElse(LocalDate.MAX),
                 ofNullable(startTime).orElse(LocalTime.MIN),
                 ofNullable(endTime).orElse(LocalTime.MAX),
-                util.getUserId());
+                security.getUserId());
     }
 }
