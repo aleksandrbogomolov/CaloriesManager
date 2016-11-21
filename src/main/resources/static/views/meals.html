@@ -82,6 +82,7 @@
     <table st-table="displayedCollection" st-safe-src="rowCollection" class="col-md-6 table">
         <thead>
         <tr>
+            <th>№</th>
             <th st-sort="description">Description</th>
             <th st-sort="dateTime">Date time</th>
             <th st-sort="calories">Calories</th>
@@ -91,11 +92,14 @@
         </thead>
         <tbody>
         <tr ng-repeat="row in displayedCollection">
-            <td>{{row.description}}</td>
-            <td>{{row.dateTime}}</td>
-            <td>{{row.calories}}</td>
-            <td><a class="btn btn-info btn-sm pull-right" ng-click="mealDetails(row.id, false)">Edit</a></td>
-            <td><a class="btn btn-danger btn-sm pull-right" ng-click="deleteMeal(row.id)">Delete</a></td>
+            <td ng-class="{exceed: row.exceed}">{{$index + 1}}</td>
+            <td ng-class="{exceed: row.exceed}">{{row.description}}</td>
+            <td ng-class="{exceed: row.exceed}">{{row.dateTime}}</td>
+            <td ng-class="{exceed: row.exceed}">{{row.calories}}</td>
+            <td ng-class="{exceed: row.exceed}"><a class="btn btn-info btn-sm pull-right"
+                                                   ng-click="mealDetails(row.id, false)">Edit</a></td>
+            <td ng-class="{exceed: row.exceed}"><a class="btn btn-danger btn-sm pull-right"
+                                                   ng-click="deleteMeal(row.id)">Delete</a></td>
         </tr>
         </tbody>
     </table>
