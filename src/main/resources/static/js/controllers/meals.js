@@ -17,6 +17,11 @@ app.controller('meals', function ($scope, $http) {
         })
     };
 
+    $scope.clearFilter = function () {
+        angular.element('#filter-form').find('input', 'textarea').val('');
+        $scope.getAll();
+    };
+
     $scope.mealDetails = function (id, isNew) {
         var form = angular.element('#edit-meal');
         if (!isNew) {

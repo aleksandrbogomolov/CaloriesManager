@@ -63,11 +63,15 @@
             <button class="btn btn-default form-control" ng-click="getFiltered()">Filter</button>
         </div>
 
+        <div class="form-group">
+            <br>
+            <button class="btn btn-default form-control" ng-click="clearFilter()">Clear</button>
+        </div>
+
         <div class="form-group pull-right">
             <label for="create" class="control-label">Add meal</label>
             <div>
-                <input type="button" id="create" class="btn btn-success" value="Create"
-                       ng-click="mealDetails(null, true)"/>
+                <button id="create" class="btn btn-success" ng-click="mealDetails(null, true)">Create</button>
             </div>
         </div>
     </form>
