@@ -2,7 +2,6 @@ package com.aleksandrbogomolov.repository.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
 import com.aleksandrbogomolov.domain.User;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -12,8 +11,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Repository
 public class MealRepositoryImpl implements MealRepository {
@@ -43,25 +40,18 @@ public class MealRepositoryImpl implements MealRepository {
     @Override
     public List<Meal> findFiltered(LocalDate startD, LocalDate endD, LocalTime startT, LocalTime endT, User user) {
         List<Meal> meals = new ArrayList<>();
+        Meal meal;
         DBCursor cursor = template.getCollection("meals").find();
         while (cursor.hasNext()) {
-            Meal meal = template.getConverter().read(Meal.class, cursor.next());
-            if (meal.getUser().equals(user)
-                && meal.getDateTime().toLocalDate().isAfter(startD)
-                && meal.getDateTime().toLocalDate().isBefore(endD)
-                && meal.getDateTime().toLocalTime().toSecondOfDay() >= startT.toSecondOfDay()
-                && meal.getDateTime().toLocalTime().toSecondOfDay() <= endT.toSecondOfDay()) {
+            meal = template.getConverter().read(Meal.class, cursor.next());
+            if (meal.getUser().equals(user) &&
+                meal.getDateTime().toLocalDate().compareTo(startD) >= 0 &&
+                meal.getDateTime().toLocalDate().compareTo(endD) < 1 &&
+                meal.getDateTime().toLocalTime().compareTo(startT) >= 0 &&
+                meal.getDateTime().toLocalTime().compareTo(endT) < 1) {
                 meals.add(meal);
             }
         }
         return meals;
-//        return Stream.of(template.getCollection("meals").find())
-//                     .map(d -> template.getConverter().read(Meal.class, d.next()))
-//                     .filter(meal -> meal.getUser().equals(user)
-//                                     && meal.getDateTime().toLocalDate().isAfter(startD)
-//                                     && meal.getDateTime().toLocalDate().isBefore(endD)
-//                                     && meal.getDateTime().toLocalTime().toSecondOfDay() >= startT.toSecondOfDay()
-//                                     && meal.getDateTime().toLocalTime().toSecondOfDay() <= endT.toSecondOfDay())
-//                     .collect(Collectors.toList());
     }
 }
