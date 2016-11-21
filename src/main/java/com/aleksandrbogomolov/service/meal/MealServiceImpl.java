@@ -1,7 +1,6 @@
 package com.aleksandrbogomolov.service.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
-import com.aleksandrbogomolov.repository.meal.MealMongoRepository;
 import com.aleksandrbogomolov.repository.meal.MealRepository;
 import com.aleksandrbogomolov.repository.user.UserRepository;
 import com.aleksandrbogomolov.to.MealTO;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-
-import static com.aleksandrbogomolov.util.converters.EntityConverter.getWithExceed;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class MealServiceImpl implements MealService {
@@ -46,11 +45,27 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public List<MealTO> findAll(String userId) {
-        return getWithExceed(repository.findAllByUserId(userId));
+        return new EntityConverter().getWithExceed(repository.findAllByUserId(userId), userId);
     }
 
     @Override
     public List<MealTO> findFiltered(LocalDate startD, LocalDate endD, LocalTime startT, LocalTime endT, String userId) {
-        return getWithExceed(repository.findFiltered(startD, endD, startT, endT, userRepository.findOneById(userId)));
+        return new EntityConverter().getWithExceed(repository.findFiltered(startD, endD, startT, endT, userRepository.findOneById(userId)), userId);
+    }
+
+    private class EntityConverter {
+
+        List<MealTO> getWithExceed(List<Meal> meals, String userId) {
+            Map<LocalDate, Integer> map = meals.stream()
+                                               .collect(Collectors.groupingBy(m -> m.getDateTime().toLocalDate(),
+                                                       Collectors.summingInt(Meal::getCalories)));
+            return meals.stream()
+                        .map(m -> convertToMealTO(m, map.get(m.getDateTime().toLocalDate()) > userRepository.findOneById(userId).getCaloriesPerDay()))
+                        .collect(Collectors.toList());
+        }
+
+        private MealTO convertToMealTO(Meal meal, boolean exceed) {
+            return new MealTO(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceed);
+        }
     }
 }
