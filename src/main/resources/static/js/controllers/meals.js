@@ -12,7 +12,7 @@ app.controller('meals', function ($scope, $http) {
 
     $scope.getFiltered = function () {
         var form = angular.element('#filter-form').serialize();
-        $http.get(mealsUrl + '/' + 'filter?' + decodeURIComponent(form)).then(function (meals) {
+        $http.get(mealsUrl + '/filter?' + decodeURIComponent(form)).then(function (meals) {
             updateTable(meals);
         })
     };

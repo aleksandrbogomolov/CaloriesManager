@@ -35,5 +35,5 @@ abstract class AbstractRestControllerTest {
 
     final Meal testMeal1 = new Meal(String.valueOf(startId + 3), LocalDateTime.of(2016, 11, 10, 10, 8), "Завтрак", 500, loggedUser);
 
-    final Meal testMeal2 = new Meal(String.valueOf(startId + 4), LocalDateTime.of(2016, 11, 10, 13, 0), "Обед", 1000, loggedUser);
+    final Meal testMeal2 = new Meal(String.valueOf(startId + 4), LocalDateTime.of(2016, 11, 12, 13, 0), "Обед", 1000, loggedUser);
 }

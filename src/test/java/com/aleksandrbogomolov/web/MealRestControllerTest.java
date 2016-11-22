@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertTrue;
 
 public class MealRestControllerTest extends AbstractRestControllerTest {
@@ -65,5 +65,18 @@ public class MealRestControllerTest extends AbstractRestControllerTest {
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
                .when().get(url)
                .then().statusCode(200).body("description", Matchers.hasItems("Завтрак", "Обед"));
+    }
+
+    @Test
+    public void getFiltered() throws Exception {
+        template.save(testMeal1);
+        template.save(testMeal2);
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .param("startDate", testMeal1.getDateTime().toLocalDate().toString())
+               .param("endDate", testMeal1.getDateTime().toLocalDate().toString())
+               .param("startTime", "")
+               .param("endTime", "")
+               .when().get(url + "/filter")
+               .then().statusCode(200).body("description", is(not(hasItem("Обед"))));
     }
 }
