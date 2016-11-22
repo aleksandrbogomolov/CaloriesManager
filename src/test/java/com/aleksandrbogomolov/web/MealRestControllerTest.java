@@ -1,5 +1,6 @@
 package com.aleksandrbogomolov.web;
 
+import com.aleksandrbogomolov.AbstractTest;
 import com.aleksandrbogomolov.domain.Meal;
 import com.aleksandrbogomolov.domain.User;
 import io.restassured.http.ContentType;
@@ -14,7 +15,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertTrue;
 
-public class MealRestControllerTest extends AbstractRestControllerTest {
+public class MealRestControllerTest extends AbstractTest {
 
     private final String url = "http://localhost:8888/meals";
 

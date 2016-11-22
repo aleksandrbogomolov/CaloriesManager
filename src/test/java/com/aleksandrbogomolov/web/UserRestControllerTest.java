@@ -1,5 +1,6 @@
 package com.aleksandrbogomolov.web;
 
+import com.aleksandrbogomolov.AbstractTest;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -10,7 +11,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertTrue;
 
-public class UserRestControllerTest extends AbstractRestControllerTest {
+public class UserRestControllerTest extends AbstractTest {
 
     private final String url = "http://localhost:8888/users";
 
