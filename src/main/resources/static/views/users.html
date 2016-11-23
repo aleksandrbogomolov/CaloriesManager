@@ -1,18 +1,22 @@
+<!--suppress ALL -->
 <div class="container">
-    <table class="col-md-6 table">
+    <table st-table="displayedCollection" st-safe-src="rowCollection" class="col-md-6 table">
+        <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Calories limit</th>
-            <th>Enabled</th>
-            <th>Created date</th>
-            <th>Roles</th>
+            <th>№</th>
+            <th st-sort="name">Name</th>
+            <th st-sort="email">Email</th>
+            <th st-sort="caloriesPerDay">Calories limit</th>
+            <th st-sort="enabled">Enabled</th>
+            <th st-sort="createdDate">Created date</th>
+            <th st-sort="roles">Roles</th>
             <th></th>
             <th></th>
         </tr>
-        <tr ng-repeat="u in users">
-            <td>{{u.id}}</td>
+        </thead>
+        <tbody>
+        <tr ng-repeat="u in displayedCollection">
+            <td>{{$index + 1}}</td>
             <td>{{u.name}}</td>
             <td>{{u.email}}</td>
             <td>{{u.caloriesPerDay}}</td>
@@ -22,6 +26,7 @@
             <td><a class="btn btn-info btn-sm" ng-click="userDetails(u.id)">Edit</a></td>
             <td><a class="btn btn-danger btn-sm" ng-click="deleteUser(u.id)">Delete</a></td>
         </tr>
+        </tbody>
     </table>
 </div>
 
@@ -36,7 +41,6 @@
                 <form class="form-horizontal" role="form" id="details-form">
                     <label for="id"></label><input type="text" id="id" name="id" hidden>
                     <label for="enabled"></label><input type="text" id="enabled" name="enabled" hidden>
-                    <label for="roles"></label><input type="text" id="roles" name="roles" hidden>
 
                     <div class="form-group">
                         <label for="name" class="control-label col-xs-3">Name</label>
@@ -75,6 +79,13 @@
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="createdDate" name="createdDate" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roles" class="control-label col-xs-3">Role</label>
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="roles" name="roles">
                         </div>
                     </div>
 
