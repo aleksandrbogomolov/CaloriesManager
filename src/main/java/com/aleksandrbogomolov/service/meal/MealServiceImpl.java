@@ -56,12 +56,8 @@ public class MealServiceImpl implements MealService {
     private class EntityConverter {
 
         List<MealTO> getWithExceed(List<Meal> meals, String userId) {
-            Map<LocalDate, Integer> map = meals.stream()
-                                               .collect(Collectors.groupingBy(m -> m.getDateTime().toLocalDate(),
-                                                       Collectors.summingInt(Meal::getCalories)));
-            return meals.stream()
-                        .map(m -> convertToMealTO(m, map.get(m.getDateTime().toLocalDate()) > userRepository.findOneById(userId).getCaloriesPerDay()))
-                        .collect(Collectors.toList());
+            Map<LocalDate, Integer> map = meals.stream().collect(Collectors.groupingBy(m -> m.getDateTime().toLocalDate(), Collectors.summingInt(Meal::getCalories)));
+            return meals.stream().map(m -> convertToMealTO(m, map.get(m.getDateTime().toLocalDate()) > userRepository.findOneById(userId).getCaloriesPerDay())).collect(Collectors.toList());
         }
 
         private MealTO convertToMealTO(Meal meal, boolean exceed) {

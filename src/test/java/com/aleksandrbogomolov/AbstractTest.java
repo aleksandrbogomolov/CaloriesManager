@@ -25,7 +25,7 @@ public abstract class AbstractTest {
     @Autowired
     protected MongoTemplate template;
 
-    private int startId = 1;
+    protected int startId = 1;
 
     protected final User loggedUser = new User(String.valueOf(startId), "User", "user@mail.ru", "password", 2000, true, LocalDate.of(2016, 11, 7), new HashSet<>(Collections.singletonList(Role.ROLE_USER)));
 
