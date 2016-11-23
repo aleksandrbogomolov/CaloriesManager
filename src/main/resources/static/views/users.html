@@ -20,7 +20,7 @@
             <td>{{u.name}}</td>
             <td>{{u.email}}</td>
             <td>{{u.caloriesPerDay}}</td>
-            <td>{{u.enabled}}</td>
+            <td><input type="checkbox" ng-checked="u.enabled"/></td>
             <td>{{u.createdDate}}</td>
             <td>{{u.roles}}</td>
             <td><a class="btn btn-info btn-sm" ng-click="userDetails(u.id)">Edit</a></td>
