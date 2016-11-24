@@ -31,10 +31,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/">Home</a></li>
-                <li ng-show="!authenticated"><a href="#/login">Login</a></li>
                 <li ng-show="authenticated"><a href="#/users">Users</a></li>
                 <li ng-show="authenticated"><a href="#/meals">Meals</a></li>
-                <li ng-show="authenticated" ng-controller="login"><a href="" ng-click="logout()">Logout</a></li>
+                <li ng-show="authenticated" ng-controller="home"><a href="" ng-click="logout()">Logout</a></li>
                 <li class="dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
                         <span class="caret"></span></a>
@@ -83,7 +82,6 @@
 <script src="js/app.js"></script>
 <script src="js/route.js"></script>
 <script src="js/controllers/home.js"></script>
-<script src="js/controllers/login.js"></script>
 <script src="js/controllers/users.js"></script>
 <script src="js/controllers/meals.js"></script>
 

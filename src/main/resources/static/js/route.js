@@ -6,10 +6,6 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'views/home.html',
             controller: 'home'
         })
-        .when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'login'
-        })
         .when('/users', {
             templateUrl: 'views/users.html',
             controller: 'users'

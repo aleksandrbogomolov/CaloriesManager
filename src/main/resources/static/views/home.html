@@ -1,8 +1,27 @@
 <div class="container">
-    &nbsp;&nbsp;&nbsp;Java Enterprise проект с
-    регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN).
-    Администратор может создавать/редактировать/удалять/пользователей, а пользователь - управлять своим
-    профилем и данными (день, еда, калории) через UI интерфейс с базовой авторизацией.
-    Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли
-    сумма калорий за день норму (редактируемый параметр в профиле пользователя).
+    <div class="col-md-9" style="display: inline-block">
+        &nbsp;&nbsp;&nbsp;Java Enterprise проект с
+        регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN).
+        Администратор может создавать/редактировать/удалять/пользователей, а пользователь - управлять своим
+        профилем и данными (день, еда, калории) через UI интерфейс с базовой авторизацией.
+        Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли
+        сумма калорий за день норму (редактируемый параметр в профиле пользователя).
+    </div>
+    <div ng-show="!authenticated"  class="col-md-3"  style="display: inline-block">
+        <div class="alert alert-danger" ng-show="error">
+            There was a problem logging in. Please try again.
+        </div>
+        <form role="form" ng-submit="login()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" ng-model="credentials.username"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password"
+                       ng-model="credentials.password"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </div>
