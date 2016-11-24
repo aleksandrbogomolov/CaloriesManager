@@ -41,6 +41,11 @@ app.controller('users', function ($scope, $http) {
         })
     };
 
+    $scope.changeEnabled = function (user) {
+        user.enabled = !user.enabled;
+        $http.post(usersUrl, user);
+    };
+
     var parseDate = function (data) {
         var month = data[1].toString().length == 1 ? '0' + data[1] : data[1];
         var day = data[2].toString().length == 1 ? '0' + data[2] : data[2];

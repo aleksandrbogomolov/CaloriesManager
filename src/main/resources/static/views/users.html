@@ -15,16 +15,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="u in displayedCollection">
+        <tr ng-repeat="row in displayedCollection">
             <td>{{$index + 1}}</td>
-            <td>{{u.name}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.caloriesPerDay}}</td>
-            <td><input type="checkbox" ng-checked="u.enabled"/></td> <!--TODO function for enable/disable user-->
-            <td>{{u.createdDate}}</td>
-            <td>{{u.roles}}</td>
-            <td><a class="btn btn-info btn-sm" ng-click="userDetails(u.id)">Edit</a></td>
-            <td><a class="btn btn-danger btn-sm" ng-click="deleteUser(u.id)">Delete</a></td>
+            <td>{{row.name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.caloriesPerDay}}</td>
+            <td><input type="checkbox" ng-checked="row.enabled" ng-click="changeEnabled(row)"/></td>
+            <td>{{row.createdDate}}</td>
+            <td>{{row.roles}}</td>
+            <td><a class="btn btn-info btn-sm" ng-click="userDetails(row.id)">Edit</a></td>
+            <td><a class="btn btn-danger btn-sm" ng-click="deleteUser(row.id)">Delete</a></td>
         </tr>
         </tbody>
     </table>
