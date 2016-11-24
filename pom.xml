@@ -6,7 +6,7 @@
 	<groupId>com.aleksandrbogomolov</groupId>
 	<artifactId>caloriesmanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>CaloriesManager</name>
 	<description>Calories manager on Spring Boot, AngularJS and MongoDB</description>
