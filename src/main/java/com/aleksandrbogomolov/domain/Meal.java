@@ -29,6 +29,8 @@ public class Meal implements Persistable<String> {
 
     private int calories;
 
+    private boolean exceed;
+
     @DBRef
     private User user;
 

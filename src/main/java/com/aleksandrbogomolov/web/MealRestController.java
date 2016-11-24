@@ -3,7 +3,6 @@ package com.aleksandrbogomolov.web;
 import com.aleksandrbogomolov.configuration.SecurityConfiguration;
 import com.aleksandrbogomolov.domain.Meal;
 import com.aleksandrbogomolov.service.meal.MealService;
-import com.aleksandrbogomolov.to.MealTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -44,12 +43,12 @@ public class MealRestController {
     }
 
     @GetMapping
-    public List<MealTO> getAll() {
+    public List<Meal> getAll() {
         return service.findAll(security.getUserId());
     }
 
     @GetMapping("/filter")
-    public List<MealTO> getFiltered(
+    public List<Meal> getFiltered(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,

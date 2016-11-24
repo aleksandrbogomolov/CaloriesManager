@@ -48,6 +48,7 @@ mongoDB.meals.update(
         "dateTime": new Date("2016-01-16T05:25:50.000Z"),
         "description": "Завтрак",
         "calories": 500,
+        "exceed": false,
         "user": {
             "$ref": "users",
             "$id": "1"
@@ -62,6 +63,7 @@ mongoDB.meals.update(
         "dateTime": new Date("2016-11-16T10:25:50.000Z"),
         "description": "Обед",
         "calories": 1000,
+        "exceed": false,
         "user": {
             "$ref": "users",
             "$id": "1"
@@ -76,6 +78,7 @@ mongoDB.meals.update(
         "dateTime": new Date("2016-11-20T11:00:00.000Z"),
         "description": "Полдник",
         "calories": 995,
+        "exceed": false,
         "user": {
             "$ref": "users",
             "$id": "1"
@@ -90,6 +93,7 @@ mongoDB.meals.update(
         "dateTime": new Date("2016-11-20T14:00:00.000Z"),
         "description": "Ужин",
         "calories": 700,
+        "exceed": false,
         "user": {
             "$ref": "users",
             "$id": "1"
@@ -104,6 +108,7 @@ mongoDB.meals.update(
         "dateTime": new Date("2016-11-21T10:20:00.000Z"),
         "description": "Обед",
         "calories": 1000,
+        "exceed": false,
         "user": {
             "$ref": "users",
             "$id": "1"
@@ -118,6 +123,7 @@ mongoDB.meals.update(
         "dateTime": new Date("2016-11-21T06:05:00.000Z"),
         "description": "Завтрак",
         "calories": 400,
+        "exceed": false,
         "user": {
             "$ref": "users",
             "$id": "1"
@@ -132,6 +138,7 @@ mongoDB.meals.update(
         "dateTime": new Date("2016-11-21T13:00:00.000Z"),
         "description": "Полдник",
         "calories": 1000,
+        "exceed": false,
         "user": {
             "$ref": "users",
             "$id": "1"
