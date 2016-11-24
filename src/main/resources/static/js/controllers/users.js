@@ -10,12 +10,10 @@ app.controller('users', function ($scope, $http) {
         });
     };
 
-    $scope.userDetails = function (id) {
+    $scope.userDetails = function (user) {
         var form = angular.element('#edit-user');
-        $http.get(usersUrl + '/' + id).then(function (user) {
-            angular.forEach(user.data, function (value, key) {
-                form.find("input[name='" + key + "']").val(key != 'createdDate' ? value : parseDate(value));
-            })
+        angular.forEach(user, function (value, key) {
+            form.find("input[name='" + key + "']").val(value);
         });
         form.modal();
     };

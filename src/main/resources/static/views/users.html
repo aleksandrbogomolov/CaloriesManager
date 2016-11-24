@@ -23,7 +23,7 @@
             <td><input type="checkbox" ng-checked="row.enabled" ng-click="changeEnabled(row)"/></td>
             <td>{{row.createdDate}}</td>
             <td>{{row.roles}}</td>
-            <td><a class="btn btn-info btn-sm" ng-click="userDetails(row.id)">Edit</a></td>
+            <td><a class="btn btn-info btn-sm" ng-click="userDetails(row)">Edit</a></td>
             <td><a class="btn btn-danger btn-sm" ng-click="deleteUser(row.id)">Delete</a></td>
         </tr>
         </tbody>

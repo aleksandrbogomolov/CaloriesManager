@@ -22,14 +22,12 @@ app.controller('meals', function ($scope, $http) {
         $scope.getAll();
     };
 
-    $scope.mealDetails = function (id, isNew) {
+    $scope.mealDetails = function (meal, isNew) {
         var form = angular.element('#edit-meal');
         if (!isNew) {
-            $http.get(mealsUrl + '/' + id).then(function (meal) {
-                angular.forEach(meal.data, function (value, key) {
-                    form.find("input[name='" + key + "']").val(key != 'dateTime' ? value : parseDate(value));
-                })
-            });
+            angular.forEach(meal, function (value, key) {
+                form.find("input[name='" + key + "']").val(value);
+            })
         } else {
             form.find('input', 'textarea').val('');
         }
