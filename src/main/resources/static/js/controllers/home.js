@@ -28,7 +28,7 @@ app.controller('home', function ($rootScope, $scope, $http, $location) {
                 $location.path('/');
                 $scope.error = false;
             } else {
-                $location.path('/login');
+                $location.path('/');
                 $scope.error = true;
             }
         });
