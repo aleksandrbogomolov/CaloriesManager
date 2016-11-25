@@ -7,7 +7,7 @@
         Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли
         сумма калорий за день норму (редактируемый параметр в профиле пользователя).
     </div>
-    <div ng-show="!authenticated"  class="col-md-3"  style="display: inline-block">
+    <div ng-show="!authenticated" class="col-md-3" style="display: inline-block">
         <div class="alert alert-danger" ng-show="error">
             There was a problem logging in. Please try again.
         </div>
@@ -21,7 +21,11 @@
                 <input type="password" class="form-control" id="password" name="password"
                        ng-model="credentials.password"/>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-horizontal">
+                <button class="btn btn-success" type="submit">Log in</button>
+                <span style="font-size: large"> or </span>
+                <button class="btn btn-primary">Sig in</button>
+            </div>
         </form>
     </div>
 </div>
