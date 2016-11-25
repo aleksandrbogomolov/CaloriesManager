@@ -32,10 +32,17 @@ app.controller('users', function ($scope, $http) {
         });
     };
 
-    $scope.deleteUser = function (id) {
-        $http.delete(usersUrl + '/' + id).then(function () {
+    $scope.deleteDialog = function (id) {
+        var form = angular.element('#delete-user');
+        form.find("input[name='delete-id']").val(id);
+        form.modal();
+    };
+
+    $scope.deleteUser = function () {
+        $http.delete(usersUrl + '/' + angular.element('#dialog-form').serialize().split('=')[1]).then(function () {
             angular.element('.table').val('');
             $scope.getAll();
+            angular.element('#delete-user').modal('hide');
         })
     };
 
