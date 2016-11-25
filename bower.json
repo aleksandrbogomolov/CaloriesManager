@@ -3,7 +3,6 @@
   "dependencies": {
     "angular": "1.5.8",
     "angular-route": "1.5.8",
-    "angular-resource": "1.5.8",
     "angular-smart-table": "2.1.7",
     "moment": "2.16.0",
     "angular-bootstrap-datetimepicker": "1.1.3",
