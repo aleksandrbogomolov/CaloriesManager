@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User save(User user) {
+        if (user.isNew()) user.setId(null);
         return repository.save(user);
     }
 
