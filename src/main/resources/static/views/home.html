@@ -11,7 +11,7 @@
         <div class="alert alert-danger" ng-show="error">
             There was a problem logging in. Please try again.
         </div>
-        <form role="form" ng-submit="login()">
+        <form role="form">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" name="username" ng-model="credentials.username"/>
@@ -22,10 +22,66 @@
                        ng-model="credentials.password"/>
             </div>
             <div class="form-horizontal">
-                <button class="btn btn-success" type="submit">Log in</button>
+                <button class="btn btn-success" type="submit" ng-click="login()">Log in</button>
                 <span style="font-size: large"> or </span>
-                <button class="btn btn-primary">Sig in</button>
+                <button class="btn btn-primary" ng-click="newUserForm()">Sig in</button>
             </div>
         </form>
+    </div>
+</div>
+
+<div class="modal fade" id="edit-user" ng-controller="users">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header col-md-offset-3">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title" id="modalTitle">User info</h2>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" id="details-form">
+                    <label for="id"></label><input type="text" id="id" name="id" hidden>
+                    <label for="enabled"></label><input type="text" id="enabled" name="enabled" hidden>
+                    <label for="roles"></label><input type="text" id="roles" name="roles" hidden>
+                    <label for="createdDate"></label><input type="text" id="createdDate" name="createdDate" hidden>
+
+                    <div class="form-group">
+                        <label for="name" class="control-label col-xs-3">Name</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="control-label col-xs-3">Email</label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-password" class="control-label col-xs-3">Password</label>
+                        <div class="col-xs-9">
+                            <input type="password" class="form-control" id="new-password" name="password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="caloriesPerDay" class="control-label col-xs-3">Calories per day</label>
+
+                        <div class="col-xs-9">
+                            <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-3 col-xs-9">
+                            <button class="btn btn-primary" ng-click="submitUser(true)">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

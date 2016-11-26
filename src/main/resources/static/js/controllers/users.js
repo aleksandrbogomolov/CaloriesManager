@@ -18,14 +18,14 @@ app.controller('users', function ($scope, $http) {
         form.modal();
     };
 
-    $scope.submitUser = function () {
+    $scope.submitUser = function (isNew) {
         var user = {};
         var form = angular.element('#details-form').serialize().split('&');
         angular.forEach(form, function (value) {
             var tmp = value.split('=');
             user[tmp[0]] = tmp[0] != 'roles' ? decodeURIComponent(tmp[1]) : decodeURIComponent(tmp[1]).split(',');
         });
-        $http.post(usersUrl, user).then(function () {
+        $http.post(isNew ? usersUrl + '/register' : usersUrl, user).then(function () {
             angular.element('#edit-user').modal('hide');
             angular.element('.table').val('');
             $scope.getAll();

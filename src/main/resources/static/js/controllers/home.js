@@ -40,4 +40,13 @@ app.controller('home', function ($rootScope, $scope, $http, $location) {
             $location.path('/');
         });
     };
+
+    $scope.newUserForm = function () {
+        var form = angular.element('#edit-user');
+        form.find("input[name='id']").val('');
+        form.find("input[name='enabled']").val(true);
+        form.find("input[name='roles']").val(['ROLE_USER']);
+        form.find("input[name='createdDate']").val([new Date().toISOString()]);
+        form.modal();
+    };
 });

@@ -27,7 +27,7 @@ public class UserRestController {
         return user;
     }
 
-    @PostMapping
+    @PostMapping(value = {"", "/register"})
     public User saveUser(@RequestBody User user) {
         log.info("Save user {}", user);
         return service.save(user);
