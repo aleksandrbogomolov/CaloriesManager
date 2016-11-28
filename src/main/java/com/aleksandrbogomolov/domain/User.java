@@ -44,7 +44,6 @@ public class User implements Persistable<String> {
                "id='" + id + '\'' +
                ", name='" + name + '\'' +
                ", email='" + email + '\'' +
-               ", password='" + password + '\'' +
                ", enabled=" + enabled +
                ", createdDate=" + createdDate +
                ", roles=" + roles +
