@@ -1,7 +1,6 @@
 package com.aleksandrbogomolov.repository.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
-import com.aleksandrbogomolov.domain.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import org.springframework.beans.factory.annotation.Autowired;

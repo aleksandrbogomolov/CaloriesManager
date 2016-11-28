@@ -1,7 +1,6 @@
 package com.aleksandrbogomolov.repository.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
-import com.aleksandrbogomolov.domain.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
