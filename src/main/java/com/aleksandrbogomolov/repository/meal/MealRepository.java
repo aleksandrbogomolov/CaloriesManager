@@ -17,5 +17,5 @@ public interface MealRepository {
 
     List<Meal> findAllByUserId(String userId);
 
-    List<Meal> findFiltered(LocalDate startD, LocalDate endD, LocalTime startT, LocalTime endT, User user);
+    List<Meal> findFiltered(LocalDate startD, LocalDate endD, LocalTime startT, LocalTime endT, String userId);
 }

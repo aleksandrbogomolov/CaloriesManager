@@ -49,7 +49,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public List<Meal> findFiltered(LocalDate startD, LocalDate endD, LocalTime startT, LocalTime endT, String userId) {
-        return checkExceed(repository.findFiltered(startD, endD, startT, endT, userRepository.findOneById(userId)), userId);
+        return checkExceed(repository.findFiltered(startD, endD, startT, endT, userId), userId);
     }
 
     private List<Meal> checkExceed(List<Meal> meals, String userId) {
