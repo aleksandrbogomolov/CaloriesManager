@@ -9,12 +9,27 @@ app.controller('home', function ($rootScope, $scope, $http, $location) {
             + btoa(credentials.username + ":" + credentials.password)
         } : {};
 
-        $http.get('/users/login', {headers: headers}).success(function (data) {
-            $rootScope.authenticated = !!data.name;
-            callback && callback();
-        }).error(function () {
+        // $http.get('/users/login', {headers: headers}).success(function (data) {
+        //     $rootScope.authenticated = !!data.name;
+        //     callback && callback();
+        // }).error(function () {
+        //     $rootScope.authenticated = false;
+        //     callback && callback();
+        // });
+        $http.get('/users/login', {headers: headers}).then(function (response) {
+            var data = response.data;
+            if (data.name) {
+                $rootScope.authenticated = true;
+                $rootScope.user = data.name;
+                $rootScope.admin = data && data.roles && data.roles.indexOf("ROLE_ADMIN") > -1;
+            } else {
+                $rootScope.authenticated = false;
+                $rootScope.admin = false;
+            }
+            callback && callback(true);
+        }, function () {
             $rootScope.authenticated = false;
-            callback && callback();
+            callback && callback(false);
         });
     };
 

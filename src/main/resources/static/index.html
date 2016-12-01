@@ -31,7 +31,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/">Home</a></li>
-                <li ng-show="authenticated"><a href="#/users">Users</a></li>
+                <li ng-show="authenticated && admin"><a href="#/users">Users</a></li>
                 <li ng-show="authenticated"><a href="#/meals">Meals</a></li>
                 <li ng-show="authenticated" ng-controller="home"><a href="" ng-click="logout()">Logout</a></li>
                 <li class="dropdown">

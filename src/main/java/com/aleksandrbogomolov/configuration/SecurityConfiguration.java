@@ -32,9 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and()
             .authorizeRequests()
-            .antMatchers("/", "/login", "/users/register").permitAll()
+            .antMatchers("/", "/login", "/users/login", "/users/register").permitAll()
             .antMatchers("/meals", "/meals/**").authenticated()
-            .antMatchers("/users", "/users/**").authenticated()
+            .antMatchers("/users", "/users/**").hasRole("ADMIN")
             .and().formLogin()
             .and().logout()
             .and().csrf().disable();

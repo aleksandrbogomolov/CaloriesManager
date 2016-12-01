@@ -4,10 +4,14 @@ import com.aleksandrbogomolov.domain.User;
 import com.aleksandrbogomolov.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -22,9 +26,12 @@ public class UserRestController {
     }
 
     @GetMapping("/login")
-    public Principal getOneByName(Principal user) {
+    public Map<String, Object> getOneByName(Principal user) {
         log.info("Get principal for user: {}", user);
-        return user;
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("name", user.getName());
+        map.put("roles", AuthorityUtils.authorityListToSet(((Authentication) user).getAuthorities()));
+        return map;
     }
 
     @PostMapping(value = {"", "/register"})
