@@ -14,6 +14,6 @@ app.config(function ($routeProvider, $httpProvider) {
             templateUrl: 'views/meals.html',
             controller: 'meals'
         })
-        .otherwise({redirect: '/'});
+        .otherwise('/');
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 });

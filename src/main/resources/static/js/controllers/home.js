@@ -26,14 +26,26 @@ app.controller('home', function ($rootScope, $scope, $http, $location) {
         });
     };
 
+    var init = function () {
+        $rootScope.$on('$routeChangeStart', function () {
+            if (!$rootScope.authenticated) {
+                $location.path('/');
+            }
+        });
+    };
+
     authenticate();
+    init();
 
     $scope.credentials = {};
 
     $scope.login = function () {
         authenticate($scope.credentials, function () {
-            if ($rootScope.authenticated) {
-                $location.path('/');
+            if ($rootScope.authenticated && $rootScope.admin) {
+                $location.path('/users');
+                $scope.error = false;
+            } else if ($rootScope.authenticated && !$rootScope.admin) {
+                $location.path('/meals');
                 $scope.error = false;
             } else {
                 $location.path('/');
