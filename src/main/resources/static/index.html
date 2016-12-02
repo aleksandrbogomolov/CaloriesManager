@@ -69,6 +69,30 @@
     </footer>
 </div>
 
+<div class="modal fade" id="delete-user">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="col-xs-offset-4">
+                    <h4 class="modal-title">Are you sure?</h4>
+                </div>
+                <form class="form-horizontal" role="form" id="dialog-form">
+                    <div class="form-group">
+                        <div class="col-xs-offset-4">
+                            <label for="delete-name"></label><input type="text" id="delete-name" name="delete-name"
+                                                                    hidden>
+                            <label for="isLogout"></label><input type="checkbox" id="isLogout" name="isLogout"
+                                                                 ng-model="isLogout" hidden>
+                            <button class="btn btn-danger btn-sm" ng-click="deleteUser()">Delete</button>
+                            <button class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>

@@ -11,7 +11,7 @@ public interface UserService {
     User save(User user);
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    void delete(String id);
+    void delete(String name);
 
     @PreAuthorize("hasRole('ADMIN')")
     User findOneById(String id);

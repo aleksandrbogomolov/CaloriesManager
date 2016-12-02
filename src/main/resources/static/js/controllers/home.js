@@ -63,6 +63,10 @@ app.controller('home', function ($rootScope, $scope, $http, $location) {
         });
     };
 
+    $rootScope.$on("logout", function () {
+        $scope.logout();
+    });
+
     $scope.newUserForm = function () {
         var form = angular.element('#edit-user');
         form.find("input[name='id']").val('');

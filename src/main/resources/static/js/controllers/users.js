@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('users', function ($scope, $http) {
+app.controller('users', function ($rootScope, $scope, $http) {
 
     var usersUrl = '/users';
 
@@ -26,7 +26,6 @@ app.controller('users', function ($scope, $http) {
         form.modal();
     };
 
-    // $scope.submitUser = function (isNew) {
     $scope.submitUser = function () {
         var user = {};
         var form = angular.element('#details-form').serialize().split('&');
@@ -34,7 +33,6 @@ app.controller('users', function ($scope, $http) {
             var tmp = value.split('=');
             user[tmp[0]] = tmp[0] != 'roles' ? decodeURIComponent(tmp[1]) : decodeURIComponent(tmp[1]).split(',');
         });
-        // $http.post(isNew ? usersUrl + '/register' : usersUrl, user).then(function () {
         $http.post(user.id == '' ? usersUrl + '/register' : usersUrl, user).then(function () {
             angular.element('#edit-user').modal('hide');
             angular.element('.table').val('');
@@ -42,17 +40,23 @@ app.controller('users', function ($scope, $http) {
         });
     };
 
-    $scope.deleteDialog = function (id) {
+    $scope.deleteDialog = function (name, logoutBool) {
         var form = angular.element('#delete-user');
-        form.find("input[name='delete-id']").val(id);
+        form.find("input[name='delete-name']").val(name);
+        $rootScope.isLogout = logoutBool;
         form.modal();
     };
 
-    $scope.deleteUser = function () {
-        $http.delete(usersUrl + '/' + angular.element('#dialog-form').serialize().split('=')[1]).then(function () {
-            angular.element('.table').val('');
-            $scope.getAll();
+    $rootScope.deleteUser = function () {
+        var form = angular.element('#dialog-form').serialize().split('&');
+        $http.delete(usersUrl + '/' + form[0].split('=')[1]).then(function () {
             angular.element('#delete-user').modal('hide');
+            if ($rootScope.isLogout) {
+                $rootScope.$emit('logout');
+            } else {
+                angular.element('.table').val('');
+                $scope.getAll();
+            }
         })
     };
 

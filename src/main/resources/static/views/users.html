@@ -25,7 +25,7 @@
             <td>{{row.createdDate}}</td>
             <td>{{row.roles}}</td>
             <td><a class="btn btn-info btn-sm" ng-click="userDetails(row, true)">Edit</a></td>
-            <td><a class="btn btn-danger btn-sm" ng-click="deleteDialog(row.id)">Delete</a></td>
+            <td><a class="btn btn-danger btn-sm" ng-click="deleteDialog(row.name, false)">Delete</a></td>
         </tr>
         </tbody>
     </table>
@@ -95,23 +95,24 @@
     </div>
 </div>
 
-<div class="modal fade" id="delete-user">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="col-xs-offset-4">
-                    <h4 class="modal-title">Are you sure?</h4>
-                </div>
-                <form class="form-horizontal" role="form" id="dialog-form">
-                    <div class="form-group">
-                        <div class="col-xs-offset-4">
-                            <label for="delete-id"></label><input type="text" id="delete-id" name="delete-id" hidden>
-                            <button class="btn btn-danger btn-sm" ng-click="deleteUser()">Delete</button>
-                            <button class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="modal fade" id="delete-user">-->
+    <!--<div class="modal-dialog modal-sm">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-body">-->
+                <!--<div class="col-xs-offset-4">-->
+                    <!--<h4 class="modal-title">Are you sure?</h4>-->
+                <!--</div>-->
+                <!--<form class="form-horizontal" role="form" id="dialog-form">-->
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-xs-offset-4">-->
+                            <!--<label for="delete-name"></label><input type="text" id="delete-name" name="delete-name"-->
+                                                                    <!--hidden>-->
+                            <!--<button class="btn btn-danger btn-sm" ng-click="deleteUser()">Delete</button>-->
+                            <!--<button class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

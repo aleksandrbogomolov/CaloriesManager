@@ -1,10 +1,10 @@
 package com.aleksandrbogomolov.web;
 
+import com.aleksandrbogomolov.configuration.SecurityConfiguration;
 import com.aleksandrbogomolov.domain.User;
 import com.aleksandrbogomolov.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +21,12 @@ public class UserRestController {
 
     private final UserService service;
 
+    private final SecurityConfiguration security;
+
     @Autowired
-    public UserRestController(UserService service) {
+    public UserRestController(UserService service, SecurityConfiguration security) {
         this.service = service;
+        this.security = security;
     }
 
     @GetMapping("/login")
@@ -41,10 +44,10 @@ public class UserRestController {
         return service.save(user);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
-        log.info("Delete user with id: {}", id);
-        service.delete(id);
+    @DeleteMapping("/{name}")
+    public void delete(@PathVariable String name) {
+        log.info("Delete user with name: {}", name);
+        service.delete(name);
     }
 
     @GetMapping("/{id}")
