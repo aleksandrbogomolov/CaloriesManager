@@ -10,22 +10,32 @@ app.controller('users', function ($scope, $http) {
         });
     };
 
-    $scope.userDetails = function (user) {
+    $scope.userDetails = function (user, isAdmin) {
         var form = angular.element('#edit-user');
-        angular.forEach(user, function (value, key) {
-            form.find("input[name='" + key + "']").val(value);
-        });
+        if (isAdmin) {
+            angular.forEach(user, function (value, key) {
+                form.find("input[name='" + key + "']").val(value);
+            });
+        } else {
+            $http.get(usersUrl + '/info/' + user).then(function (userInfo) {
+                angular.forEach(userInfo.data, function (value, key) {
+                    form.find("input[name='" + key + "']").val(key != 'createdDate' ? value : parseDate(value));
+                });
+            })
+        }
         form.modal();
     };
 
-    $scope.submitUser = function (isNew) {
+    // $scope.submitUser = function (isNew) {
+    $scope.submitUser = function () {
         var user = {};
         var form = angular.element('#details-form').serialize().split('&');
         angular.forEach(form, function (value) {
             var tmp = value.split('=');
             user[tmp[0]] = tmp[0] != 'roles' ? decodeURIComponent(tmp[1]) : decodeURIComponent(tmp[1]).split(',');
         });
-        $http.post(isNew ? usersUrl + '/register' : usersUrl, user).then(function () {
+        // $http.post(isNew ? usersUrl + '/register' : usersUrl, user).then(function () {
+        $http.post(user.id == '' ? usersUrl + '/register' : usersUrl, user).then(function () {
             angular.element('#edit-user').modal('hide');
             angular.element('.table').val('');
             $scope.getAll();

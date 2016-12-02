@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findOneByName(String email) {
-        return repository.findOneByName(email);
+    public User findOneByName(String name) {
+        return repository.findOneByName(name);
     }
 
     @Override

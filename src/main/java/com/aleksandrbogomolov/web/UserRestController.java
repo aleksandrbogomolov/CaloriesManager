@@ -4,6 +4,7 @@ import com.aleksandrbogomolov.domain.User;
 import com.aleksandrbogomolov.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class UserRestController {
     }
 
     @GetMapping("/login")
-    public Map<String, Object> getOneByName(Principal user) {
+    public Map<String, Object> getPrincipal(Principal user) {
         log.info("Get principal for user: {}", user);
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("name", user.getName());
@@ -50,6 +51,12 @@ public class UserRestController {
     public User getOneById(@PathVariable String id) {
         log.info("Get user with id: {}", id);
         return service.findOneById(id);
+    }
+
+    @GetMapping("/info/{name}")
+    public User getOneByName(@PathVariable String name) {
+        log.info("Get user with name: {}", name);
+        return service.findOneByName(name);
     }
 
     @GetMapping

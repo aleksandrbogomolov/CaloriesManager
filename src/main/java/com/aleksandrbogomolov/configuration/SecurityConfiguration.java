@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -34,8 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.httpBasic().and()
             .authorizeRequests()
             .antMatchers("/", "/login", "/users/login", "/users/register").permitAll()
-            .antMatchers("/meals", "/meals/**").authenticated()
-            .antMatchers("/users", "/users/**").hasRole("ADMIN")
+            .antMatchers("/meals", "/meals/**", "/users", "/users/**").authenticated()
             .and().formLogin()
             .and().logout()
             .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
