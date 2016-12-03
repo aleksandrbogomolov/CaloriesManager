@@ -1,13 +1,14 @@
 package com.aleksandrbogomolov.web;
 
 import com.aleksandrbogomolov.AbstractTest;
-import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertTrue;
 
@@ -28,28 +29,34 @@ public class UserRestControllerTest extends AbstractTest {
 
     @Test
     public void saveUser() throws Exception {
-        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .contentType(ContentType.JSON).body(testUser1)
+        Response response = getResponseForCSRF();
+        given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .contentType(JSON).body(testUser1)
                .when().post(url)
                .then().statusCode(200).body("name", equalTo("test"));
     }
 
     @Test
     public void delete() throws Exception {
+        Response response = getResponseForCSRF();
         template.insert(testUser1);
         template.insert(testUser2);
         assertTrue(3 == template.getCollection("users").count());
-        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().delete(url + "/" + testUser2.getId())
-               .then().statusCode(200);
+        given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+               .when().delete(url + "/" + testUser2.getName())
+               .then().log().all().statusCode(200);
         assertTrue(2 == template.getCollection("users").count());
     }
 
     @Test
-    public void getOneById() throws Exception {
+    public void getOneByName() throws Exception {
         template.insert(testUser1);
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().get(url + "/" + testUser1.getId())
+               .when().get(url + "/" + testUser1.getName())
                .then().statusCode(200).body("name", equalTo("test"));
     }
 

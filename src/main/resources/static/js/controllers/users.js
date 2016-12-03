@@ -17,7 +17,7 @@ app.controller('users', function ($rootScope, $scope, $http) {
                 form.find("input[name='" + key + "']").val(value);
             });
         } else {
-            $http.get(usersUrl + '/info/' + user).then(function (userInfo) {
+            $http.get(usersUrl + '/' + user).then(function (userInfo) {
                 angular.forEach(userInfo.data, function (value, key) {
                     form.find("input[name='" + key + "']").val(key != 'createdDate' ? value : parseDate(value));
                 });

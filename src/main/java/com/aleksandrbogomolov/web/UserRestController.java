@@ -1,6 +1,5 @@
 package com.aleksandrbogomolov.web;
 
-import com.aleksandrbogomolov.configuration.SecurityConfiguration;
 import com.aleksandrbogomolov.domain.User;
 import com.aleksandrbogomolov.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +20,9 @@ public class UserRestController {
 
     private final UserService service;
 
-    private final SecurityConfiguration security;
-
     @Autowired
-    public UserRestController(UserService service, SecurityConfiguration security) {
+    public UserRestController(UserService service) {
         this.service = service;
-        this.security = security;
     }
 
     @GetMapping("/login")
@@ -50,13 +46,7 @@ public class UserRestController {
         service.delete(name);
     }
 
-    @GetMapping("/{id}")
-    public User getOneById(@PathVariable String id) {
-        log.info("Get user with id: {}", id);
-        return service.findOneById(id);
-    }
-
-    @GetMapping("/info/{name}")
+    @GetMapping("/{name}")
     public User getOneByName(@PathVariable String name) {
         log.info("Get user with name: {}", name);
         return service.findOneByName(name);

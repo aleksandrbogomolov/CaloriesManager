@@ -10,15 +10,16 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
+@ComponentScan
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserService service;
@@ -33,8 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().and()
-            .authorizeRequests()
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().httpBasic()
+            .and().authorizeRequests()
             .antMatchers("/", "/login", "/users/login", "/users/register").permitAll()
             .antMatchers("/meals", "/meals/**", "/users", "/users/**").authenticated()
             .and().formLogin()

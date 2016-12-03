@@ -33,11 +33,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findOneById(String id) {
-        return repository.findOneById(id);
-    }
-
-    @Override
     public User findOneByName(String name) {
         return repository.findOneByName(name);
     }

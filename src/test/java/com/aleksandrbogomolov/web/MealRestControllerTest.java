@@ -4,6 +4,7 @@ import com.aleksandrbogomolov.AbstractTest;
 import com.aleksandrbogomolov.domain.Meal;
 import com.aleksandrbogomolov.domain.User;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +33,10 @@ public class MealRestControllerTest extends AbstractTest {
 
     @Test
     public void save() throws Exception {
-        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+        Response response = getResponseForCSRF();
+        given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
                .contentType(ContentType.JSON).body(testMeal1)
                .when().post(url)
                .then().statusCode(200);
@@ -42,10 +46,13 @@ public class MealRestControllerTest extends AbstractTest {
 
     @Test
     public void delete() throws Exception {
+        Response response = getResponseForCSRF();
         template.save(testMeal1);
         template.save(testMeal2);
         assertTrue(2 == template.getCollection("meals").count());
-        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+        given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
                .when().delete(url + "/" + testMeal1.getId())
                .then().statusCode(200);
         assertTrue(1 == template.getCollection("meals").count());
