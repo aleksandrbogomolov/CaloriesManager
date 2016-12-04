@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!--suppress HtmlUnknownAnchorTarget -->
-<html lang="en">
+<html lang="en" ng-app="calories-manager">
 <head>
-    <title>Calories manager</title>
+    <title>{{'TITLE' | translate}}</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"/>
@@ -15,7 +15,7 @@
         }
     </style>
 </head>
-<body ng-app="calories-manager" ng-cloak class="ng-cloak">
+<body ng-cloak class="ng-cloak">
 
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
@@ -97,6 +97,7 @@
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
 <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+<script src="bower_components/angular-translate/angular-translate.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/moment/min/moment.min.js"></script>
 <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
@@ -107,6 +108,7 @@
 <script src="js/controllers/home.js"></script>
 <script src="js/controllers/users.js"></script>
 <script src="js/controllers/meals.js"></script>
+<script src="js/controllers/translate.js"></script>
 
 </body>
 </html>
