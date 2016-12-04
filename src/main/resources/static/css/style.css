@@ -4,18 +4,12 @@
     background-color: #383737;
 }
 
-.navbar-header {
-    -webkit-transform-style: preserve-3d;
-
-    -moz-transform-style: preserve-3d;
-
-    transform-style: preserve-3d;
-
-    height: 50px;
+#navbar a.lang {
+    color: #9acfea;
 }
 
-.navbar-nav > li > .dropdown-menu {
-    z-index: 9999;
+#navbar a.lang:hover {
+    color: #00b3ee;
 }
 
 /*Footer*/

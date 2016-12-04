@@ -1,40 +1,38 @@
 <div class="container">
     <div class="col-md-8" style="display: inline-block">
-        &nbsp;&nbsp;&nbsp;Java Enterprise проект с
-        регистрацией/авторизацией и интерфейсом на основе ролей (USER, ADMIN).
-        Администратор может создавать/редактировать/удалять/пользователей, а пользователь - управлять своим
-        профилем и данными (день, еда, калории) через UI интерфейс с базовой авторизацией.
-        Возможна фильтрация данных по датам и времени, при этом цвет записи таблицы еды зависит от того, превышает ли
-        сумма калорий за день норму (редактируемый параметр в профиле пользователя).
+        &nbsp;&nbsp;&nbsp;{{'HOME_DESCRIPTION' | translate}}
     </div>
     <div ng-show="!authenticated" class="col-md-3" style="display: inline-block">
         <div class="alert alert-danger" ng-show="error">
-            There was a problem logging in. Please try again.
+            {{'HOME_LOGIN_ERROR' | translate}}
         </div>
         <form role="form">
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">{{'HOME_LOGIN_USERNAME' | translate}}:</label>
                 <input type="text" class="form-control" id="username" name="username" ng-model="credentials.username"/>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">{{'HOME_LOGIN_PASSWORD' | translate}}:</label>
                 <input type="password" class="form-control" id="password" name="password"
                        ng-model="credentials.password"/>
             </div>
             <div class="form-horizontal">
-                <button class="btn btn-success" type="submit" ng-click="login()">Log in</button>
+                <button class="btn btn-success" type="submit" ng-click="login()">{{'HOME_LOGIN' | translate}}</button>
                 <span style="font-size: large"> or </span>
-                <button class="btn btn-primary" ng-click="newUserForm()">Sig in</button>
+                <button class="btn btn-primary" ng-click="newUserForm()">{{'HOME_SIGIN' | translate}}</button>
             </div>
         </form>
     </div>
 
     <div ng-show="authenticated" class="col-md-4" ng-controller="users">
-        <h4>Welcome {{user}}!</h4>
+        <h4>{{'HOME_WELCOME' | translate}} {{user}}!</h4>
         <div class="form-horizontal">
-            <button class="btn btn-success" type="submit" ng-click="userDetails(user, false)">Change account</button>
-            <span style="font-size: large"> or </span>
-            <button class="btn btn-primary" ng-click="deleteDialog(user, true)">Delete account</button>
+            <button class="btn btn-success" type="submit" ng-click="userDetails(user, false)">{{'HOME_CHANGE_ACCOUNT' |
+                translate}}
+            </button>
+            <span style="font-size: large"> {{'HOME_OR' | translate}} </span>
+            <button class="btn btn-primary" ng-click="deleteDialog(user, true)">{{'HOME_DELETE_ACCOUNT' | translate}}
+            </button>
         </div>
     </div>
 </div>
@@ -44,7 +42,7 @@
         <div class="modal-content">
             <div class="modal-header col-md-offset-3">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title" id="modalTitle">User info</h2>
+                <h2 class="modal-title" id="modalTitle">{{'HOME_USER_DETAILS' | translate}}</h2>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" id="details-form">
@@ -54,7 +52,8 @@
                     <label for="createdDate"></label><input type="text" id="createdDate" name="createdDate" hidden>
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">Name</label>
+                        <label for="name" class="control-label col-xs-3">{{'HOME_USER_DETAILS_NAME' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="name" name="name">
@@ -62,7 +61,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="control-label col-xs-3">Email</label>
+                        <label for="email" class="control-label col-xs-3">{{'HOME_USER_DETAILS_EMAIL' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="email" name="email">
@@ -70,14 +70,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="new-password" class="control-label col-xs-3">Password</label>
+                        <label for="new-password" class="control-label col-xs-3">{{'HOME_USER_DETAILS_PASSWORD' |
+                            translate}}</label>
                         <div class="col-xs-9">
                             <input type="password" class="form-control" id="new-password" name="password">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="caloriesPerDay" class="control-label col-xs-3">Calories per day</label>
+                        <label for="caloriesPerDay" class="control-label col-xs-3">{{'HOME_USER_DETAILS_CALORIES' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay">
@@ -86,7 +88,9 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button class="btn btn-primary" ng-click="submitUser()">Save</button>
+                            <button class="btn btn-primary" ng-click="submitUser()">{{'HOME_USER_DETAILS_SAVE' |
+                                translate}}
+                            </button>
                         </div>
                     </div>
                 </form>

@@ -19,3 +19,21 @@ app.config(function ($routeProvider, $httpProvider) {
         .otherwise('/');
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 });
+
+app.controller('TranslateController', function($translate, $scope) {
+    $scope.changeLanguage = function (langKey) {
+        $translate.use(langKey);
+    };
+
+    $scope.useLang = function () {
+        if ($translate.use() == 'ru') return true;
+    }
+});
+
+app.config(function ($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'translate/',
+        suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('ru');
+});

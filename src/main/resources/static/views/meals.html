@@ -1,10 +1,10 @@
 <!--suppress ALL -->
 <div class="container">
-    <h4>Filter meals</h4>
+    <h4>{{'MEALS_FILTER_TITLE' | translate}}</h4>
     <form class="form-inline" id="filter-form">
         <div class="dropdown form-group">
             <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown">
-                <label for="startDate" class="control-label">Start date</label>
+                <label for="startDate" class="control-label">{{'MEALS_START_DATE' | translate}}</label>
                 <div>
                     <input name="startDate" id="startDate" class="form-control"
                            data-ng-model="startDate" data-date-time-input="YYYY-MM-DD"/>
@@ -18,7 +18,7 @@
 
         <div class="dropdown form-group">
             <a class="dropdown-toggle" id="dropdown5" role="button" data-toggle="dropdown">
-                <label for="endDate" class="control-label">End date</label>
+                <label for="endDate" class="control-label">{{'MEALS_END_DATE' | translate}}</label>
                 <div>
                     <input name="endDate" id="endDate" class="form-control"
                            data-ng-model="endDate" data-date-time-input="YYYY-MM-DD"/>
@@ -32,7 +32,7 @@
 
         <div class="dropdown form-group">
             <a class="dropdown-toggle" id="dropdown4" role="button" data-toggle="dropdown">
-                <label for="startTime" class="control-label">Start time</label>
+                <label for="startTime" class="control-label">{{'MEALS_START_TIME' | translate}}</label>
                 <div>
                     <input name="startTime" id="startTime" class="form-control"
                            data-ng-model="startTime" data-date-time-input="HH:mm"/>
@@ -46,7 +46,7 @@
 
         <div class="dropdown form-group">
             <a class="dropdown-toggle" id="dropdown6" role="button" data-toggle="dropdown">
-                <label for="endTime" class="control-label">End time</label>
+                <label for="endTime" class="control-label">{{'MEALS_END_TIME' | translate}}</label>
                 <div>
                     <input name="endTime" id="endTime" class="form-control"
                            data-ng-model="endTime" data-date-time-input="HH:mm"/>
@@ -60,18 +60,21 @@
 
         <div class="form-group">
             <br>
-            <button class="btn btn-default form-control" ng-click="getFiltered()">Filter</button>
+            <button class="btn btn-default form-control" ng-click="getFiltered()">{{'MEALS_FILTER' | translate}}
+            </button>
         </div>
 
         <div class="form-group">
             <br>
-            <button class="btn btn-default form-control" ng-click="clearFilter()">Clear</button>
+            <button class="btn btn-default form-control" ng-click="clearFilter()">{{'MEALS_CLEAR' | translate}}</button>
         </div>
 
         <div class="form-group pull-right">
-            <label for="create" class="control-label">Add meal</label>
+            <label for="create" class="control-label"></label>
             <div>
-                <button id="create" class="btn btn-success" ng-click="mealDetails(null, true)">Create</button>
+                <button id="create" class="btn btn-success" ng-click="mealDetails(null, true)">{{'MEALS_CREATE' |
+                    translate}}
+                </button>
             </div>
         </div>
     </form>
@@ -83,9 +86,9 @@
         <thead>
         <tr>
             <th>№</th>
-            <th st-sort="description">Description</th>
-            <th st-sort="dateTime">Date time</th>
-            <th st-sort="calories">Calories</th>
+            <th st-sort="description">{{'MEALS_DESCRIPTION' | translate}}</th>
+            <th st-sort="dateTime">{{'MEALS_DATE_TIME' | translate}}</th>
+            <th st-sort="calories">{{'MEALS_CALORIES' | translate}}</th>
             <th></th>
             <th></th>
         </tr>
@@ -97,9 +100,11 @@
             <td ng-class="{exceed: row.exceed}">{{row.dateTime}}</td>
             <td ng-class="{exceed: row.exceed}">{{row.calories}}</td>
             <td ng-class="{exceed: row.exceed}"><a class="btn btn-info btn-sm pull-right"
-                                                   ng-click="mealDetails(row, false)">Edit</a></td>
+                                                   ng-click="mealDetails(row, false)">{{'USERS_TABLE_EDIT' |
+                translate}}</a></td>
             <td ng-class="{exceed: row.exceed}"><a class="btn btn-danger btn-sm pull-right"
-                                                   ng-click="deleteMeal(row.id)">Delete</a></td>
+                                                   ng-click="deleteMeal(row.id)">{{'USERS_TABLE_DELETE' |
+                translate}}</a></td>
         </tr>
         </tbody>
     </table>
@@ -110,14 +115,15 @@
         <div class="modal-content">
             <div class="modal-header col-md-offset-3">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title" id="modalTitle">Meal info</h2>
+                <h2 class="modal-title" id="modalTitle">{{'MEALS_INFO' | translate}}</h2>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" id="details-form">
                     <label for="id"></label><input type="text" id="id" name="id" hidden>
 
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3">Description</label>
+                        <label for="description" class="control-label col-xs-3">{{'MEALS_DESCRIPTION' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="description" name="description">
@@ -127,7 +133,8 @@
                     <div class="dropdown">
                         <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown">
                             <div class="form-group">
-                                <label for="dateTime" class="control-label col-xs-3">Date time</label>
+                                <label for="dateTime" class="control-label col-xs-3">{{'MEALS_DATE_TIME' |
+                                    translate}}</label>
                                 <div class="col-xs-9">
                                     <input type="text" name="dateTime" id="dateTime" class="form-control"
                                            data-ng-model="dateDropDownInput" data-date-time-input="YYYY-MM-DD HH:mm"/>
@@ -141,7 +148,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="calories" class="control-label col-xs-3">Calories</label>
+                        <label for="calories" class="control-label col-xs-3">{{'MEALS_CALORIES' | translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="number" class="form-control" id="calories" name="calories">
@@ -150,7 +157,9 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button ng-click="submitMeal()" class="btn btn-primary">Save</button>
+                            <button ng-click="submitMeal()" class="btn btn-primary">{{'HOME_USER_DETAILS_SAVE' |
+                                translate}}
+                            </button>
                         </div>
                     </div>
                 </form>

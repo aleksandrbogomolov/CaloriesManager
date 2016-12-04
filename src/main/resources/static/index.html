@@ -20,32 +20,20 @@
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/">Calories manager</a>
+            <a class="navbar-brand" href="#/">{{'TITLE' | translate}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/">Home</a></li>
-                <li ng-show="authenticated && admin"><a href="#/users">Users</a></li>
-                <li ng-show="authenticated"><a href="#/meals">Meals</a></li>
-                <li ng-show="authenticated" ng-controller="home"><a href="" ng-click="logout()">Logout</a></li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#/">Action</a></li>
-                        <li><a href="#/">Another action</a></li>
-                        <li><a href="#/">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#/">Separated link</a></li>
-                        <li><a href="#/">One more separated link</a></li>
-                    </ul>
+                <li><a href="#/">{{'HOME' | translate}}</a></li>
+                <li ng-show="authenticated && admin"><a href="#/users">{{'USERS' | translate}}</a></li>
+                <li ng-show="authenticated"><a href="#/meals">{{'MEALS' | translate}}</a></li>
+                <li ng-show="authenticated" ng-controller="home"><a href="" ng-click="logout()">{{'LOGOUT' |
+                    translate}}</a></li>
+                <li ng-show="!useLang()" ng-controller="TranslateController"><a class="lang" href=""
+                                                                                ng-click="changeLanguage('ru')">РУ</a>
+                </li>
+                <li ng-show="useLang()" ng-controller="TranslateController"><a class="lang" href=""
+                                                                               ng-click="changeLanguage('en')">EN</a>
                 </li>
             </ul>
         </div>
@@ -74,7 +62,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="col-xs-offset-4">
-                    <h4 class="modal-title">Are you sure?</h4>
+                    <h4 class="modal-title">{{'ARE_YOU_SURE' | translate}}</h4>
                 </div>
                 <form class="form-horizontal" role="form" id="dialog-form">
                     <div class="form-group">
@@ -83,8 +71,10 @@
                                                                     hidden>
                             <label for="isLogout"></label><input type="checkbox" id="isLogout" name="isLogout"
                                                                  ng-model="isLogout" hidden>
-                            <button class="btn btn-danger btn-sm" ng-click="deleteUser()">Delete</button>
-                            <button class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-danger btn-sm" ng-click="deleteUser()">{{'DELETE' | translate}}
+                            </button>
+                            <button class="btn btn-success btn-sm" data-dismiss="modal">{{'CANCEL' | translate}}
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -98,17 +88,17 @@
 <script src="bower_components/angular-route/angular-route.min.js"></script>
 <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
 <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/moment/min/moment.min.js"></script>
 <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
 <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
 <script src="bower_components/angular-date-time-input/src/dateTimeInput.js"></script>
 <script src="js/app.js"></script>
-<script src="js/route.js"></script>
 <script src="js/controllers/home.js"></script>
 <script src="js/controllers/users.js"></script>
 <script src="js/controllers/meals.js"></script>
-<script src="js/controllers/translate.js"></script>
+<script src="js/translate.js"></script>
 
 </body>
 </html>

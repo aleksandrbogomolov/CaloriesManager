@@ -1,16 +1,16 @@
 <!--suppress ALL -->
 <div class="container">
-    <h4>List of users</h4>
+    <h4>{{'USERS_TABLE_TITLE' | translate}}</h4>
     <table st-table="displayedCollection" st-safe-src="rowCollection" class="col-md-6 table">
         <thead>
         <tr>
             <th>№</th>
-            <th st-sort="name">Name</th>
-            <th st-sort="email">Email</th>
-            <th st-sort="caloriesPerDay">Calories limit</th>
-            <th st-sort="enabled">Enabled</th>
-            <th st-sort="createdDate">Created date</th>
-            <th st-sort="roles">Roles</th>
+            <th st-sort="name">{{'HOME_USER_DETAILS_NAME' | translate}}</th>
+            <th st-sort="email">{{'HOME_USER_DETAILS_EMAIL' | translate}}</th>
+            <th st-sort="caloriesPerDay">{{'USERS_TABLE_CALORIES' | translate}}</th>
+            <th st-sort="enabled">{{'USERS_TABLE_ENABLED' | translate}}</th>
+            <th st-sort="createdDate">{{'USERS_DETAILS_DATE' | translate}}</th>
+            <th st-sort="roles">{{'USERS_DETAILS_ROLE' | translate}}</th>
             <th></th>
             <th></th>
         </tr>
@@ -24,8 +24,10 @@
             <td><input type="checkbox" ng-checked="row.enabled" ng-click="changeEnabled(row)"/></td>
             <td>{{row.createdDate}}</td>
             <td>{{row.roles}}</td>
-            <td><a class="btn btn-info btn-sm" ng-click="userDetails(row, true)">Edit</a></td>
-            <td><a class="btn btn-danger btn-sm" ng-click="deleteDialog(row.name, false)">Delete</a></td>
+            <td><a class="btn btn-info btn-sm" ng-click="userDetails(row, true)">{{'USERS_TABLE_EDIT' | translate}}</a>
+            </td>
+            <td><a class="btn btn-danger btn-sm" ng-click="deleteDialog(row.name, false)">{{'USERS_TABLE_DELETE' |
+                translate}}</a></td>
         </tr>
         </tbody>
     </table>
@@ -36,7 +38,7 @@
         <div class="modal-content">
             <div class="modal-header col-md-offset-3">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title" id="modalTitle">User info</h2>
+                <h2 class="modal-title" id="modalTitle">{{'HOME_USER_DETAILS' | translate}}</h2>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" id="details-form">
@@ -45,7 +47,8 @@
                     <label for="password"></label><input type="password" id="password" name="password" hidden>
 
                     <div class="form-group">
-                        <label for="name" class="control-label col-xs-3">Name</label>
+                        <label for="name" class="control-label col-xs-3">{{'HOME_USER_DETAILS_NAME' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="name" name="name">
@@ -53,7 +56,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="control-label col-xs-3">Email</label>
+                        <label for="email" class="control-label col-xs-3">{{'HOME_USER_DETAILS_EMAIL' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="email" name="email">
@@ -61,7 +65,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="caloriesPerDay" class="control-label col-xs-3">Calories per day</label>
+                        <label for="caloriesPerDay" class="control-label col-xs-3">{{'HOME_USER_DETAILS_CALORIES' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay">
@@ -69,7 +74,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="createdDate" class="control-label col-xs-3">Created date</label>
+                        <label for="createdDate" class="control-label col-xs-3">{{'USERS_DETAILS_DATE' |
+                            translate}}</label>
 
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="createdDate" name="createdDate" readonly>
@@ -77,7 +83,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="roles" class="control-label col-xs-3">Role</label>
+                        <label for="roles" class="control-label col-xs-3">{{'USERS_DETAILS_ROLE' | translate}}</label>
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="roles" name="roles">
                         </div>
@@ -85,8 +91,9 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <!--<button class="btn btn-primary" ng-click="submitUser(false)">Save</button>-->
-                            <button class="btn btn-primary" ng-click="submitUser()">Save</button>
+                            <button class="btn btn-primary" ng-click="submitUser()">{{'HOME_USER_DETAILS_SAVE' |
+                                translate}}
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -94,25 +101,3 @@
         </div>
     </div>
 </div>
-
-<!--<div class="modal fade" id="delete-user">-->
-    <!--<div class="modal-dialog modal-sm">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-body">-->
-                <!--<div class="col-xs-offset-4">-->
-                    <!--<h4 class="modal-title">Are you sure?</h4>-->
-                <!--</div>-->
-                <!--<form class="form-horizontal" role="form" id="dialog-form">-->
-                    <!--<div class="form-group">-->
-                        <!--<div class="col-xs-offset-4">-->
-                            <!--<label for="delete-name"></label><input type="text" id="delete-name" name="delete-name"-->
-                                                                    <!--hidden>-->
-                            <!--<button class="btn btn-danger btn-sm" ng-click="deleteUser()">Delete</button>-->
-                            <!--<button class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</form>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
