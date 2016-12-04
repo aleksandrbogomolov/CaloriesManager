@@ -34,7 +34,7 @@ app.controller('home', function ($rootScope, $scope, $http, $location) {
         });
     };
 
-    authenticate();
+    // authenticate(); //ToDo mb delete
     init();
 
     $scope.credentials = {};
