@@ -1,7 +1,7 @@
 FROM aleksandrbogomolov/mongodb
 
-ADD init.sh /init.sh
-ADD dump /dump
+ADD docker_init.sh /init.sh
+ADD populate.js /populate.js
 
 RUN chmod +x /init.sh
 ENTRYPOINT ["/init.sh"]

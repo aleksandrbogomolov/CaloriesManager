@@ -130,7 +130,7 @@
                         <configuration>
                             <executable>mongo</executable>
                             <arguments>
-                                <argument>./mongo-seed/manual/populate.js</argument>
+                                <argument>./mongo-seed/populate.js</argument>
                             </arguments>
                         </configuration>
                         <goals>

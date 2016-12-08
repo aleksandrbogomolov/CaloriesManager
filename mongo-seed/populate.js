@@ -1,11 +1,11 @@
-var mongoDB = db.getSiblingDB("calories-manager");
+var mongo = db.getSiblingDB("calories-manager");
 
-mongoDB.createCollection("users");
-mongoDB.createCollection("meals");
+mongo.createCollection("users");
+mongo.createCollection("meals");
 
 print('[MONGO] Populate mongodb');
 
-mongoDB.users.update(
+mongo.users.update(
     {"email": "user@mail.ru"},
     {
         "_id": "1",
@@ -22,7 +22,7 @@ mongoDB.users.update(
     }, {"upsert": true}
 );
 
-mongoDB.users.update(
+mongo.users.update(
     {"email": "admin@mail.ru"},
     {
         "_id": "2",
@@ -40,7 +40,7 @@ mongoDB.users.update(
     }, {"upsert": true}
 );
 
-mongoDB.meals.update(
+mongo.meals.update(
     {"_id": "3"},
     {
         "_id": "3",
@@ -55,7 +55,7 @@ mongoDB.meals.update(
         }
     }, {"upsert": true});
 
-mongoDB.meals.update(
+mongo.meals.update(
     {"_id": "4"},
     {
         "_id": "4",
@@ -70,7 +70,7 @@ mongoDB.meals.update(
         }
     }, {"upsert": true});
 
-mongoDB.meals.update(
+mongo.meals.update(
     {"_id": "5"},
     {
         "_id": "5",
@@ -85,7 +85,7 @@ mongoDB.meals.update(
         }
     }, {"upsert": true});
 
-mongoDB.meals.update(
+mongo.meals.update(
     {"_id": "6"},
     {
         "_id": "6",
@@ -100,7 +100,7 @@ mongoDB.meals.update(
         }
     }, {"upsert": true});
 
-mongoDB.meals.update(
+mongo.meals.update(
     {"_id": "7"},
     {
         "_id": "7",
@@ -115,7 +115,7 @@ mongoDB.meals.update(
         }
     }, {"upsert": true});
 
-mongoDB.meals.update(
+mongo.meals.update(
     {"_id": "8"},
     {
         "_id": "8",
@@ -130,7 +130,7 @@ mongoDB.meals.update(
         }
     }, {"upsert": true});
 
-mongoDB.meals.update(
+mongo.meals.update(
     {"_id": "9"},
     {
         "_id": "9",

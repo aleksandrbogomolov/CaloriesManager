@@ -20,7 +20,7 @@ while [[ $? -ne 0 && $COUNTER -lt 60 ]] ; do
 done
 
 # Restore from dump
-mongorestore --db calories-manager /dump
+mongo populate.js
 
 # Keep container running
 tail -f /dev/null
