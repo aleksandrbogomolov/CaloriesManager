@@ -1,0 +1,14 @@
+version: '2'
+services:
+  mongodb:
+    build: ./mongo-seed/docker
+    command: -smallfiles
+  web:
+    image: aleksandrbogomolov/java8
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+    volumes:
+      - ./target/caloriesmanager-0.0.1-SNAPSHOT.jar:/app.jar
+    command: java -Dspring.data.mongodb.host=mongodb -jar /app.jar

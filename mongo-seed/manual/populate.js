@@ -3,7 +3,7 @@ var mongoDB = db.getSiblingDB("calories-manager");
 mongoDB.createCollection("users");
 mongoDB.createCollection("meals");
 
-print('populate mongodb');
+print('[MONGO] Populate mongodb');
 
 mongoDB.users.update(
     {"email": "user@mail.ru"},
@@ -145,4 +145,4 @@ mongoDB.meals.update(
         }
     }, {"upsert": true});
 
-print('populate complete');
+print('[MONGO] Populate complete');

@@ -8,8 +8,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Getter
@@ -34,20 +36,32 @@ public class User implements Persistable<String> {
 
     private boolean enabled;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate createdDate;
 
     private Set<Role> roles;
 
+    public User(String id, String name, String email, String password, int caloriesPerDay, boolean enabled, String createdDate, Set<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.caloriesPerDay = caloriesPerDay;
+        this.enabled = enabled;
+        this.createdDate = LocalDate.parse(createdDate, DateTimeFormatter.ISO_DATE);
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-               "id='" + id + '\'' +
-               ", name='" + name + '\'' +
-               ", email='" + email + '\'' +
-               ", enabled=" + enabled +
-               ", createdDate=" + createdDate +
-               ", roles=" + roles +
-               '}';
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", createdDate=" + createdDate +
+                ", roles=" + roles +
+                '}';
     }
 
     @Override
@@ -66,19 +80,6 @@ public class User implements Persistable<String> {
         if (createdDate != null ? !createdDate.equals(user.createdDate) : user.createdDate != null) return false;
         return roles != null ? roles.equals(user.roles) : user.roles == null;
 
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + caloriesPerDay;
-        result = 31 * result + (enabled ? 1 : 0);
-        result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
-        result = 31 * result + (roles != null ? roles.hashCode() : 0);
-        return result;
     }
 
     @Override
