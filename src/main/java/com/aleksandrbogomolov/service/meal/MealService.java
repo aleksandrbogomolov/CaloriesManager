@@ -1,6 +1,7 @@
 package com.aleksandrbogomolov.service.meal;
 
 import com.aleksandrbogomolov.domain.Meal;
+import com.aleksandrbogomolov.exception.NotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ public interface MealService {
     void delete(String id, String userId);
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    Meal findOne(String id, String userId);
+    Meal findOne(String id, String userId) throws NotFoundException;
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     List<Meal> findAll(String userId);

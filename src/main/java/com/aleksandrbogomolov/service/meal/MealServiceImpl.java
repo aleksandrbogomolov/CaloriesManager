@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.aleksandrbogomolov.exception.CheckExceptionUtil.checkNotFound;
+
 @Service
 public class MealServiceImpl implements MealService {
 
@@ -39,7 +41,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public Meal findOne(String id, String userId) {
-        return repository.findOneByIdAndUserId(id, userId);
+        return checkNotFound(repository.findOneByIdAndUserId(id, userId), id);
     }
 
     @Override

@@ -35,11 +35,11 @@ public class MealRestControllerTest extends AbstractTest {
     public void save() throws Exception {
         Response response = getResponseForCSRF();
         given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .contentType(ContentType.JSON).body(testMeal1)
-               .when().post(url)
-               .then().statusCode(200);
+                .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .contentType(ContentType.JSON).body(testMeal1)
+                .when().post(url)
+                .then().statusCode(200);
         assertTrue(1 == template.getCollection("meals").count());
         assertTrue(testMeal1.equals(template.findOne(new Query(Criteria.where("_id").is(testMeal1.getId())), Meal.class)));
     }
@@ -51,10 +51,10 @@ public class MealRestControllerTest extends AbstractTest {
         template.save(testMeal2);
         assertTrue(2 == template.getCollection("meals").count());
         given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().delete(url + "/" + testMeal1.getId())
-               .then().statusCode(200);
+                .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .when().delete(url + "/" + testMeal1.getId())
+                .then().statusCode(200);
         assertTrue(1 == template.getCollection("meals").count());
     }
 
@@ -62,8 +62,15 @@ public class MealRestControllerTest extends AbstractTest {
     public void getOne() throws Exception {
         template.save(testMeal1);
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().get(url + "/" + testMeal1.getId())
-               .then().statusCode(200).body("description", equalTo("Завтрак"));
+                .when().get(url + "/" + testMeal1.getId())
+                .then().statusCode(200).body("description", equalTo("Завтрак"));
+    }
+
+    @Test
+    public void checkGetOneNotFound() {
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .when().get(url + "/" + testMeal1.getId())
+                .then().statusCode(404);
     }
 
     @Test
@@ -71,8 +78,8 @@ public class MealRestControllerTest extends AbstractTest {
         template.save(testMeal1);
         template.save(testMeal2);
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().get(url)
-               .then().statusCode(200).body("description", Matchers.hasItems("Завтрак", "Обед"));
+                .when().get(url)
+                .then().statusCode(200).body("description", Matchers.hasItems("Завтрак", "Обед"));
     }
 
     @Test
@@ -80,11 +87,11 @@ public class MealRestControllerTest extends AbstractTest {
         template.save(testMeal1);
         template.save(testMeal2);
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .param("startDate", testMeal1.getDateTime().toLocalDate().toString())
-               .param("endDate", testMeal1.getDateTime().toLocalDate().toString())
-               .param("startTime", "")
-               .param("endTime", "")
-               .when().get(url + "/filter")
-               .then().statusCode(200).body("description", is(not(hasItem("Обед"))));
+                .param("startDate", testMeal1.getDateTime().toLocalDate().toString())
+                .param("endDate", testMeal1.getDateTime().toLocalDate().toString())
+                .param("startTime", "")
+                .param("endTime", "")
+                .when().get(url + "/filter")
+                .then().statusCode(200).body("description", is(not(hasItem("Обед"))));
     }
 }

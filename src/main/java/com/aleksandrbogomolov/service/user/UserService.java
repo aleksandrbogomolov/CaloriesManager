@@ -1,6 +1,7 @@
 package com.aleksandrbogomolov.service.user;
 
 import com.aleksandrbogomolov.domain.User;
+import com.aleksandrbogomolov.exception.NotFoundException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -15,7 +16,7 @@ public interface UserService {
     void delete(String name);
 
     @PreAuthorize("authenticated")
-    User findOneByName(String name);
+    User findOneByName(String name) throws NotFoundException;
 
     @PreAuthorize("hasRole('ADMIN')")
     List<User> findAll();

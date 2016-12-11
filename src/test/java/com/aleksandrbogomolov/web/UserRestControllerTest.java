@@ -31,11 +31,11 @@ public class UserRestControllerTest extends AbstractTest {
     public void saveUser() throws Exception {
         Response response = getResponseForCSRF();
         given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .contentType(JSON).body(testUser1)
-               .when().post(url)
-               .then().statusCode(200).body("name", equalTo("test"));
+                .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .contentType(JSON).body(testUser1)
+                .when().post(url)
+                .then().statusCode(200).body("name", equalTo("test"));
     }
 
     @Test
@@ -45,10 +45,10 @@ public class UserRestControllerTest extends AbstractTest {
         template.insert(testUser2);
         assertTrue(3 == template.getCollection("users").count());
         given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
-               .auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().delete(url + "/" + testUser2.getName())
-               .then().log().all().statusCode(200);
+                .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .when().delete(url + "/" + testUser2.getName())
+                .then().log().all().statusCode(200);
         assertTrue(2 == template.getCollection("users").count());
     }
 
@@ -56,8 +56,15 @@ public class UserRestControllerTest extends AbstractTest {
     public void getOneByName() throws Exception {
         template.insert(testUser1);
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().get(url + "/" + testUser1.getName())
-               .then().statusCode(200).body("name", equalTo("test"));
+                .when().get(url + "/" + testUser1.getName())
+                .then().statusCode(200).body("name", equalTo("test"));
+    }
+
+    @Test
+    public void checkGetOneNotFound() {
+        given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .when().get(url + "/" + testUser1.getName())
+                .then().statusCode(404);
     }
 
     @Test
@@ -65,7 +72,7 @@ public class UserRestControllerTest extends AbstractTest {
         template.insert(testUser1);
         template.insert(testUser2);
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
-               .when().get(url)
-               .then().statusCode(200).body("name", Matchers.hasItems("User", "test", "test2"));
+                .when().get(url)
+                .then().statusCode(200).body("name", Matchers.hasItems("User", "test", "test2"));
     }
 }
