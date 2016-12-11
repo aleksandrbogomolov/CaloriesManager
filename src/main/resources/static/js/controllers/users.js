@@ -37,6 +37,8 @@ app.controller('users', function ($rootScope, $scope, $http) {
             angular.element('#edit-user').modal('hide');
             angular.element('.table').val('');
             $scope.getAll();
+        }, function (response) {
+            alert('Failed: ' + response.data.cause + "\n" + response.data.detail);
         });
     };
 
