@@ -51,6 +51,8 @@ app.controller('meals', function ($scope, $http) {
         $http.delete(mealsUrl + '/' + id).then(function () {
             angular.element('.table').val('');
             $scope.getAll();
+        }, function (response) {
+            alert('Failed: ' + response.data.cause + "\n" + response.data.detail);
         })
     };
 
