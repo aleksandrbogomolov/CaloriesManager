@@ -51,7 +51,7 @@
                             translate}}</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" ng-model="name" required>
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                             translate}}</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" ng-model="email" required>
                         </div>
                     </div>
 
@@ -69,7 +69,8 @@
                             translate}}</label>
 
                         <div class="col-xs-9">
-                            <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay">
+                            <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay"
+                                   ng-model="caloriesPerDay" required>
                         </div>
                     </div>
 
@@ -85,7 +86,7 @@
                     <div class="form-group">
                         <label for="roles" class="control-label col-xs-3">{{'USERS_DETAILS_ROLE' | translate}}</label>
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="roles" name="roles">
+                            <input type="text" class="form-control" id="roles" name="roles" ng-model="roles" required>
                         </div>
                     </div>
 

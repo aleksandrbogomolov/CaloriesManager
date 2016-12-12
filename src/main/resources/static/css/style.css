@@ -1,3 +1,13 @@
+/*Form*/
+
+input.ng-invalid.ng-touched {
+    background-color:pink;
+}
+
+input.ng-valid.ng-touched {
+    background-color:lightgreen;
+}
+
 /*Navbar*/
 
 .navbar {
@@ -65,5 +75,5 @@
 }
 
 .exceed {
-    background-color: #e9996d;
+    background-color: #ffddb4;
 }

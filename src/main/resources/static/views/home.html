@@ -6,15 +6,28 @@
         <div class="alert alert-danger" ng-show="error">
             {{'HOME_LOGIN_ERROR' | translate}}
         </div>
-        <form role="form">
+        <form name="form" role="form" novalidate>
             <div class="form-group">
                 <label for="username">{{'HOME_LOGIN_USERNAME' | translate}}:</label>
-                <input type="text" class="form-control" id="username" name="username" ng-model="credentials.username"/>
+                <input type="text" class="form-control" id="username" name="username" ng-model="credentials.username"
+                       required minlength="3"/>
+                <div ng-show="form.$submitted || form.username.$touched">
+                    <div ng-show="form.username.$error.required">{{'HOME_LOGIN_USERNAME_ERROR' | translate}}</div>
+                    <div ng-show="form.username.$error.minlength">{{'HOME_LOGIN_USERNAME_LENGTH_ERROR' |
+                        translate}}
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="password">{{'HOME_LOGIN_PASSWORD' | translate}}:</label>
                 <input type="password" class="form-control" id="password" name="password"
-                       ng-model="credentials.password"/>
+                       ng-model="credentials.password" required minlength="5"/>
+                <div ng-show="form.$submitted || form.password.$touched">
+                    <div ng-show="form.password.$error.required">{{'HOME_LOGIN_PASSWORD_ERROR' | translate}}</div>
+                    <div ng-show="form.password.$error.minlength">{{'HOME_LOGIN_PASSWORD_LENGTH_ERROR' |
+                        translate}}
+                    </div>
+                </div>
             </div>
             <div class="form-horizontal">
                 <button class="btn btn-success" type="submit" ng-click="login()">{{'HOME_LOGIN' | translate}}</button>
@@ -45,7 +58,7 @@
                 <h2 class="modal-title" id="modalTitle">{{'HOME_USER_DETAILS' | translate}}</h2>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" id="details-form">
+                <form class="form-horizontal" name="form" role="form" id="details-form" novalidate>
                     <label for="id"></label><input type="text" id="id" name="id" hidden>
                     <label for="enabled"></label><input type="text" id="enabled" name="enabled" hidden>
                     <label for="roles"></label><input type="text" id="roles" name="roles" hidden>
@@ -56,7 +69,14 @@
                             translate}}</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" ng-model="name" required
+                                   minlength="3">
+                        </div>
+                        <div ng-show="form.$submitted || form.name.$touched" class="col-xs-offset-3 col-xs-9">
+                            <div ng-show="form.name.$error.required">{{'HOME_LOGIN_USERNAME_ERROR' | translate}}</div>
+                            <div ng-show="form.name.$error.minlength">{{'HOME_LOGIN_USERNAME_LENGTH_ERROR' |
+                                translate}}
+                            </div>
                         </div>
                     </div>
 
@@ -65,7 +85,14 @@
                             translate}}</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" ng-model="email" required>
+                        </div>
+                        <div ng-show="form.$submitted || form.email.$touched" class="col-xs-offset-3 col-xs-9">
+                            <div ng-show="form.email.$error.required">{{'HOME_USER_DETAILS_EMAIL_ERROR' | translate}}
+                            </div>
+                            <div ng-show="form.email.$error.email">{{'HOME_USER_DETAILS_EMAIL_VALIDATION_ERROR' |
+                                translate}}
+                            </div>
                         </div>
                     </div>
 
@@ -73,7 +100,15 @@
                         <label for="new-password" class="control-label col-xs-3">{{'HOME_USER_DETAILS_PASSWORD' |
                             translate}}</label>
                         <div class="col-xs-9">
-                            <input type="password" class="form-control" id="new-password" name="password">
+                            <input type="password" class="form-control" id="new-password" name="password"
+                                   ng-model="password" required minlength="5">
+                        </div>
+                        <div ng-show="form.$submitted || form.password.$touched" class="col-xs-offset-3 col-xs-9">
+                            <div ng-show="form.password.$error.required">{{'HOME_LOGIN_PASSWORD_ERROR' | translate}}
+                            </div>
+                            <div ng-show="form.password.$error.minlength">{{'HOME_LOGIN_PASSWORD_LENGTH_ERROR' |
+                                translate}}
+                            </div>
                         </div>
                     </div>
 
@@ -82,7 +117,16 @@
                             translate}}</label>
 
                         <div class="col-xs-9">
-                            <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay">
+                            <input type="number" class="form-control" id="caloriesPerDay" name="caloriesPerDay"
+                                   ng-model="caloriesPerDay" min="1000" max="5000" required>
+                        </div>
+                        <div ng-show="form.$submitted || form.caloriesPerDay.$touched" class="col-xs-offset-3 col-xs-9">
+                            <div ng-show="form.caloriesPerDay.$error.required">{{'HOME_LOGIN_CALORIES_ERROR' |
+                                translate}}
+                            </div>
+                            <div ng-show="form.caloriesPerDay.$error.min || form.caloriesPerDay.$error.max">
+                                {{'HOME_LOGIN_CALORIES_RANGE_ERROR' | translate}}
+                            </div>
                         </div>
                     </div>
 
