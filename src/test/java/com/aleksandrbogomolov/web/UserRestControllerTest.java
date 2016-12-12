@@ -48,7 +48,20 @@ public class UserRestControllerTest extends AbstractTest {
                 .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
                 .auth().basic(loggedUser.getName(), loggedUser.getPassword())
                 .when().delete(url + "/" + testUser2.getName())
-                .then().log().all().statusCode(200);
+                .then().statusCode(200);
+        assertTrue(2 == template.getCollection("users").count());
+    }
+
+    @Test
+    public void checkDeleteNotFound() {
+        Response response = getResponseForCSRF();
+        template.insert(testUser1);
+        assertTrue(2 == template.getCollection("users").count());
+        given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .when().delete(url + "/" + testUser2.getName())
+                .then().statusCode(404);
         assertTrue(2 == template.getCollection("users").count());
     }
 

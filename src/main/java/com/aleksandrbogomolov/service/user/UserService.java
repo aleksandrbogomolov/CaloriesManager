@@ -13,7 +13,7 @@ public interface UserService {
     User save(User user);
 
     @PreAuthorize("authenticated")
-    void delete(String name);
+    void delete(String name) throws NotFoundException;
 
     @PreAuthorize("authenticated")
     User findOneByName(String name) throws NotFoundException;

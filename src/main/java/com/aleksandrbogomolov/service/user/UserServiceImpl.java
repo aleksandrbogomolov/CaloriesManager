@@ -1,7 +1,6 @@
 package com.aleksandrbogomolov.service.user;
 
 import com.aleksandrbogomolov.domain.User;
-import com.aleksandrbogomolov.exception.NotFoundException;
 import com.aleksandrbogomolov.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.aleksandrbogomolov.exception.CheckExceptionUtil.checkNotFound;
+import static com.aleksandrbogomolov.exception.CheckExceptionUtil.checkDeleteNotFound;
+import static com.aleksandrbogomolov.exception.CheckExceptionUtil.checkGetNotFound;
 
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -32,12 +32,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void delete(String name) {
-        repository.deleteByName(name);
+        checkDeleteNotFound(repository.deleteByName(name), name);
     }
 
     @Override
     public User findOneByName(String name) {
-        return checkNotFound(repository.findOneByName(name), name);
+        return checkGetNotFound(repository.findOneByName(name), name);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = Optional.ofNullable(repository.findOneByName(s))
-                            .orElseThrow(() -> new UsernameNotFoundException("User with name: " + s + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with name: " + s + " not found"));
 
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
     }

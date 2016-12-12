@@ -29,7 +29,9 @@ public class MealRepositoryImpl implements MealRepository {
     public Meal save(Meal meal) { return mongoRepository.save(meal); }
 
     @Override
-    public void deleteByIdAndUserId(String id, String userId) { mongoRepository.deleteByIdAndUserId(id, userId); }
+    public int deleteByIdAndUserId(String id, String userId) {
+        return mongoRepository.deleteByIdAndUserId(id, userId);
+    }
 
     @Override
     public Meal findOneByIdAndUserId(String id, String userId) { return mongoRepository.findOneByIdAndUserId(id, userId); }

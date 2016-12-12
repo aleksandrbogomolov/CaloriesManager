@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.aleksandrbogomolov.exception.CheckExceptionUtil.checkNotFound;
+import static com.aleksandrbogomolov.exception.CheckExceptionUtil.checkDeleteNotFound;
+import static com.aleksandrbogomolov.exception.CheckExceptionUtil.checkGetNotFound;
 
 @Service
 public class MealServiceImpl implements MealService {
@@ -36,12 +37,12 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public void delete(String id, String userId) {
-        repository.deleteByIdAndUserId(id, userId);
+        checkDeleteNotFound(repository.deleteByIdAndUserId(id, userId), id);
     }
 
     @Override
     public Meal findOne(String id, String userId) {
-        return checkNotFound(repository.findOneByIdAndUserId(id, userId), id);
+        return checkGetNotFound(repository.findOneByIdAndUserId(id, userId), id);
     }
 
     @Override

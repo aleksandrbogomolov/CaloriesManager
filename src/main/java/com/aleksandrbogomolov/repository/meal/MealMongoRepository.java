@@ -11,7 +11,7 @@ public interface MealMongoRepository extends MongoRepository<Meal, String> {
 
     Meal save(Meal meal);
 
-    void deleteByIdAndUserId(String id, String userId);
+    int deleteByIdAndUserId(String id, String userId);
 
     Meal findOneByIdAndUserId(String id, String userId);
 

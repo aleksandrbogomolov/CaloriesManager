@@ -10,7 +10,7 @@ public interface MealRepository {
 
     Meal save(Meal meal);
 
-    void deleteByIdAndUserId(String id, String userId);
+    int deleteByIdAndUserId(String id, String userId);
 
     Meal findOneByIdAndUserId(String id, String userId);
 

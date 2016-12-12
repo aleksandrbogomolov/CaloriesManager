@@ -59,6 +59,19 @@ public class MealRestControllerTest extends AbstractTest {
     }
 
     @Test
+    public void checkDeleteNotFound() {
+        Response response = getResponseForCSRF();
+        template.save(testMeal1);
+        assertTrue(1 == template.getCollection("meals").count());
+        given().cookie("XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .header("X-XSRF-TOKEN", response.cookie("XSRF-TOKEN"))
+                .auth().basic(loggedUser.getName(), loggedUser.getPassword())
+                .when().delete(url + "/" + testMeal2.getId())
+                .then().statusCode(404);
+        assertTrue(1 == template.getCollection("meals").count());
+    }
+
+    @Test
     public void getOne() throws Exception {
         template.save(testMeal1);
         given().auth().basic(loggedUser.getName(), loggedUser.getPassword())
