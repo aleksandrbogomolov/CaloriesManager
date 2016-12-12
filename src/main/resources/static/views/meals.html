@@ -118,16 +118,23 @@
                 <h2 class="modal-title" id="modalTitle">{{'MEALS_INFO' | translate}}</h2>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" id="details-form" novalidate>
+                <form class="form-horizontal" name="form" role="form" id="details-form" novalidate>
                     <label for="id"></label><input type="text" id="id" name="id" hidden>
 
                     <div class="form-group">
                         <label for="description" class="control-label col-xs-3">{{'MEALS_DESCRIPTION' |
                             translate}}</label>
-
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="description" name="description"
-                                   ng-model="description" required>
+                                   ng-model="description" minlength="4">
+                        </div>
+                        <div ng-show="form.$submitted" class="col-xs-offset-3 col-xs-9">
+                            <div ng-show="form.description.$error.required">{{'MEALS_DESCRIPTION_ERROR' |
+                                translate}}
+                            </div>
+                            <div ng-show="form.description.$error.minlength">{{'MEALS_DESCRIPTION_LENGTH_ERROR' |
+                                translate}}
+                            </div>
                         </div>
                     </div>
 
@@ -138,8 +145,13 @@
                                     translate}}</label>
                                 <div class="col-xs-9">
                                     <input type="text" name="dateTime" id="dateTime" class="form-control"
-                                           data-ng-model="dateDropDownInput" data-date-time-input="YYYY-MM-DD HH:mm"
-                                           required/>
+                                           data-ng-model="dateDropDownInput" data-date-time-input="YYYY-MM-DD HH:mm"/>
+                                </div>
+                                <div ng-show="form.$submitted"
+                                     class="col-xs-offset-3 col-xs-9">
+                                    <div ng-show="form.dateTime.$error.required">{{'MEALS_DATETIME_ERROR' |
+                                        translate}}
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -151,10 +163,15 @@
 
                     <div class="form-group">
                         <label for="calories" class="control-label col-xs-3">{{'MEALS_CALORIES' | translate}}</label>
-
                         <div class="col-xs-9">
                             <input type="number" class="form-control" id="calories" name="calories" ng-model="calories"
-                                   required>
+                                   min="10">
+                        </div>
+                        <div ng-show="form.$submitted" class="col-xs-offset-3 col-xs-9">
+                            <div ng-show="form.calories.$error.required">{{'MEALS_CALORIES_ERROR' | translate}}
+                            </div>
+                            <div ng-show="form.calories.$error.min">{{'MEALS_CALORIES_RANGE_ERROR' | translate}}
+                            </div>
                         </div>
                     </div>
 

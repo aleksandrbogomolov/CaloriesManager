@@ -38,6 +38,8 @@
   "USERS_TABLE_ENABLED": "Включен",
   "USERS_TABLE_EDIT": "Править",
   "USERS_TABLE_DELETE": "Удалить",
+  "USER_FORM_ROLES_ERROR": "Введите описание роли для пользователя",
+  "USER_FORM_ROLES_LENGTH_ERROR": "Описание роли должно быть 9 или более символов длинной",
   "MEALS_FILTER_TITLE": "Фильтровать питание",
   "MEALS_START_DATE": "Дата начала",
   "MEALS_END_DATE": "Дата окончания",
@@ -48,6 +50,11 @@
   "MEALS_CREATE": "Создать новое",
   "MEALS_INFO": "Детали питания",
   "MEALS_DESCRIPTION": "Описание",
+  "MEALS_DESCRIPTION_ERROR": "Введите описание",
+  "MEALS_DESCRIPTION_LENGTH_ERROR": "Длина описания должна быть 4 или более символов",
   "MEALS_DATE_TIME": "Дата время",
-  "MEALS_CALORIES": "Каллории"
+  "MEALS_DATETIME_ERROR": "Введите дату и время",
+  "MEALS_CALORIES": "Каллории",
+  "MEALS_CALORIES_ERROR": "Введите количество каллорий",
+  "MEALS_CALORIES_RANGE_ERROR": "Количество калорий должно быть не меньше чем 10"
 }

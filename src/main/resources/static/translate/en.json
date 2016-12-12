@@ -38,6 +38,8 @@
   "USERS_TABLE_ENABLED": "Enabled",
   "USERS_TABLE_EDIT": "Edit",
   "USERS_TABLE_DELETE": "Delete",
+  "USER_FORM_ROLES_ERROR": "Enter role for user",
+  "USER_FORM_ROLES_LENGTH_ERROR": "Description of role must be 9 or more characters",
   "MEALS_FILTER_TITLE": "Filter meals",
   "MEALS_START_DATE": "Start date",
   "MEALS_END_DATE": "End date",
@@ -48,6 +50,11 @@
   "MEALS_CREATE": "Create new",
   "MEALS_INFO": "Meal info",
   "MEALS_DESCRIPTION": "Description",
+  "MEALS_DESCRIPTION_ERROR": "Enter description",
+  "MEALS_DESCRIPTION_LENGTH_ERROR": "Description must be 4 or more characters",
   "MEALS_DATE_TIME": "Date time",
-  "MEALS_CALORIES": "Calories"
+  "MEALS_DATETIME_ERROR": "Enter date time",
+  "MEALS_CALORIES": "Calories",
+  "MEALS_CALORIES_ERROR": "Enter calories",
+  "MEALS_CALORIES_RANGE_ERROR": "Number of calories should be not less than 10"
 }
