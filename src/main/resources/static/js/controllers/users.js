@@ -38,7 +38,7 @@ app.controller('users', function ($rootScope, $scope, $http) {
             angular.element('.table').val('');
             $scope.getAll();
         }, function (response) {
-            alert('Failed: ' + response.data.cause + "\n" + response.data.detail);
+            alert('Failed: ' + response.data.message + '\n' + prepareErrorMessage(response.data.errors));
         });
     };
 
@@ -85,6 +85,14 @@ app.controller('users', function ($rootScope, $scope, $http) {
             usersCollection.push(user);
         });
         $scope.rowCollection = usersCollection;
+    };
+
+    var prepareErrorMessage = function (data) {
+        var result = "";
+        angular.forEach(data, function (cause) {
+            result += (cause.field + ': ' + cause.defaultMessage + '\n');
+        });
+        return result;
     };
 
     $scope.getAll();

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MealRestController {
     }
 
     @PostMapping
-    public void save(@RequestBody Meal meal) {
+    public void save(@RequestBody @Valid Meal meal) {
         String userId = security.getUserId();
         service.save(meal, userId);
         log.info("Saved meal: {} for user with id: {}", meal, userId);

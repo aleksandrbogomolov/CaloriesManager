@@ -4,12 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
@@ -25,20 +30,28 @@ public class User implements Persistable<String> {
     private String id;
 
     @Indexed(unique = true)
+    @NotNull
+    @Length(min = 3, max = 24)
     private String name;
 
     @Indexed(unique = true)
+    @Email
     private String email;
 
+    @Length(min = 5, max = 16)
     private String password;
 
+    @Min(value = 1000)
+    @Max(value = 5000)
     private int caloriesPerDay;
 
     private boolean enabled;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull
     private LocalDate createdDate;
 
+    @NotNull
     private Set<Role> roles;
 
     public User(String id, String name, String email, String password, int caloriesPerDay, boolean enabled, String createdDate, Set<Role> roles) {

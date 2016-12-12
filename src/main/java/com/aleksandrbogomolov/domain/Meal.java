@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,10 +26,15 @@ public class Meal implements Persistable<String> {
     @Id
     private String id;
 
+    @NotNull
     private LocalDateTime dateTime;
 
+    @NotNull
+    @Length(min = 4, max = 255)
     private String description;
 
+    @NotNull
+    @Min(value = 10)
     private int calories;
 
     private boolean exceed;
@@ -37,12 +45,12 @@ public class Meal implements Persistable<String> {
     @Override
     public String toString() {
         return "Meal{" +
-               "id='" + id + '\'' +
-               ", dateTime=" + dateTime +
-               ", description='" + description + '\'' +
-               ", calories=" + calories +
-               ", user=" + user +
-               '}';
+                "id='" + id + '\'' +
+                ", dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", calories=" + calories +
+                ", user=" + user +
+                '}';
     }
 
     @Override
@@ -61,5 +69,7 @@ public class Meal implements Persistable<String> {
     }
 
     @Override
-    public boolean isNew() { return getId().equals(""); }
+    public boolean isNew() {
+        return getId().equals("");
+    }
 }

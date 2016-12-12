@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,7 +36,7 @@ public class UserRestController {
     }
 
     @PostMapping(value = {"", "/register"})
-    public User saveUser(@RequestBody User user) {
+    public User saveUser(@RequestBody @Valid User user) {
         log.info("Save user {}", user);
         return service.save(user);
     }

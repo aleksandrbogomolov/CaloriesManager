@@ -44,6 +44,8 @@ app.controller('meals', function ($scope, $http) {
         $http.post(mealsUrl, meal).then(function () {
             angular.element('#edit-meal').modal('hide');
             $scope.getAll();
+        }, function (response) {
+            alert('Failed: ' + response.data.message + "\n" + prepareErrorMessage(response.data.errors));
         });
     };
 
@@ -74,6 +76,14 @@ app.controller('meals', function ($scope, $http) {
             mealsCollection.push(meal);
         });
         $scope.rowCollection = mealsCollection;
+    };
+
+    var prepareErrorMessage = function (data) {
+        var result = "";
+        angular.forEach(data, function (cause) {
+            result += (cause.field + ': ' + cause.defaultMessage + '\n');
+        });
+        return result;
     };
 
     $scope.getAll();
